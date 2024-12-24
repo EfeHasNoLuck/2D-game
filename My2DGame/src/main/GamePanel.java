@@ -112,6 +112,14 @@ public class GamePanel extends JPanel implements Runnable
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		
+		
+		long start = 0;
+		if(keyH.debug == true)
+		{
+			start = System.nanoTime();
+		}
+		
+		
 		// TILE
 		tileM.draw(g2);
 		
@@ -128,9 +136,18 @@ public class GamePanel extends JPanel implements Runnable
 		// UI
 		ui.draw(g2);
 		
+		if(keyH.debug == true)
+		{
+			long end = System.nanoTime();
+			long diff = end - start;
+			g2.setColor(Color.white);
+			g2.drawString("diff: " + diff, 10, 400);
+			System.out.println(diff);
+		}
+				
 		g2.dispose();
 	}
-	
+
 	public void playMusic(int i) {
 		
 		music.setFile(i);

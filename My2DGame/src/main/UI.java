@@ -22,12 +22,11 @@ public class UI {
 	DecimalFormat dFormat = new DecimalFormat("#0.00");
 	
 	public UI(GamePanel gp) {
-	
 		this.gp = gp;
 		
 		arial_40 = new Font("arial", Font.PLAIN, 40);
 		arial_80B = new Font("arial", Font.PLAIN, 80);
-		OBJ_Key key = new OBJ_Key();
+		OBJ_Key key = new OBJ_Key(gp);
 		keyImage = key.image;
 	}
 	

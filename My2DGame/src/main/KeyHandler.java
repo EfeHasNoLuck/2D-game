@@ -2,10 +2,12 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Console;
 
 public class KeyHandler implements KeyListener {
 	
-	public boolean upPressed, downPressed, leftPressed, rightPressed; 
+	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	public boolean debug = false;
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
@@ -15,6 +17,10 @@ public class KeyHandler implements KeyListener {
 		
 		int code = e.getKeyCode();
 		
+		if(code == KeyEvent.VK_T)
+		{
+			 debug = !debug; 
+		}
 		if(code == KeyEvent.VK_W)
 		{
 			upPressed = true;
