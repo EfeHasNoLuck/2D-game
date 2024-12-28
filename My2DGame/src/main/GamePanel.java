@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable
 	
 	//SYSTEM
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler();
+	public KeyHandler keyH = new KeyHandler(this);
 	Sound music = new Sound();
 	Sound se = new Sound();
 	public CollisionChecker cChecker = new CollisionChecker(this);
@@ -43,8 +44,15 @@ public class GamePanel extends JPanel implements Runnable
 	
 	//ENTITY
 	public Player player = new Player(this, keyH);
+	public SuperObject target[] = new SuperObject[10];
 	public SuperObject obj[] = new SuperObject[10];
-			
+	public Entity npc[] = new Entity[10];
+		
+	public int gameState;
+	public final int titleState = 0;
+	public final int playState = 1;
+	public final int pauseState = 2;
+	public final int dialogueState = 3;
 	
 	public GamePanel()
 	{
@@ -57,7 +65,9 @@ public class GamePanel extends JPanel implements Runnable
 	public void setUpGame() {
 		
 		aSetter.setObject();
+		aSetter.setNPC();
 		playMusic(0);
+		gameState = titleState;
 	}
 
 	public void startGameThread()
@@ -95,7 +105,6 @@ public class GamePanel extends JPanel implements Runnable
 			if(timer >= 1000000000)
 			{
 				{
-					System.out.println((fps));
 					drawCount = 0;
 					timer = 0;
 				}
@@ -105,7 +114,18 @@ public class GamePanel extends JPanel implements Runnable
 	
 	public void update(){
 		
-		player.update();
+		if(gameState == playState) {	
+			player.update();
+			//npc
+			for(int i = 0; i < npc.length; i++) {
+				if(npc[i] != null) {
+					npc[i].update();
+				}
+			}
+		}
+		if(gameState == pauseState) {
+			//stop
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -119,22 +139,37 @@ public class GamePanel extends JPanel implements Runnable
 			start = System.nanoTime();
 		}
 		
-		
-		// TILE
-		tileM.draw(g2);
-		
-		//OBJECT
-		for(int i = 0; i < obj.length; i++) {
-			if(obj[i] != null) {
-				obj[i].draw(g2, this);
-			}
+		// TITLE SCREEN
+		if(gameState == titleState) {
+			ui.draw(g2);
 		}
 		
-		//PLAYER
-		player.draw(g2);
+		// GAME
+		else {
+			tileM.draw(g2);
+			
+			//OBJECT
+			for(int i = 0; i < obj.length; i++) {
+				if(obj[i] != null) {
+					obj[i].draw(g2, this);
+				}
+			}
+			
+			for(int i = 0; i < npc.length; i++) {
+				if(npc[i] != null) {
+					npc[i].draw(g2);
+				}
+			}
+			
+			//PLAYER
+			player.draw(g2);
+			
+			// UI
+			ui.draw(g2);
+		}
 		
-		// UI
-		ui.draw(g2);
+		// TILE
+	
 		
 		if(keyH.debug == true)
 		{

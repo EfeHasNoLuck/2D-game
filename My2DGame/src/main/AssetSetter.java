@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_;
 import object.OBJ_Chest;
 import object.OBJ_Door;
 import object.OBJ_Energy;
@@ -47,5 +48,12 @@ public class AssetSetter {
 		gp.obj[7] = new OBJ_Energy(gp);
 		gp.obj[7].worldX = 37 * gp.tileSize;
 		gp.obj[7].worldY = 42 * gp.tileSize;
+	}
+	
+	public void setNPC() {
+		
+		gp.npc[0] = new NPC_(gp);
+		gp.npc[0].worldX = gp.tileSize*21;
+		gp.npc[0].worldY = gp.tileSize*21;
 	}
 }
