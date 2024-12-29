@@ -1,27 +1,16 @@
 package object;
 
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
+import entity.Entity;
 import main.GamePanel;
 
-public class OBJ_Energy extends SuperObject{
+public class OBJ_Energy extends Entity{
 
-	GamePanel gp;
 	
 	public OBJ_Energy(GamePanel gp) {
-		
-		this.gp = gp;
+		super(gp);
 		
 		name = "Energy";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/energy.png"));
-			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		collision = true;
+		down1 = setup("/objects/energy");
+
 	}
 }
