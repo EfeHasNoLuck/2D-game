@@ -169,7 +169,7 @@ public class UI {
 			if(i < gp.player.life) {
 				g2.drawImage(heart_full, x, y, null);
 			}
-			i++;
+		i++;
 			x += gp.tileSize/1.4;
 		}
 	}

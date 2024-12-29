@@ -10,7 +10,7 @@ public class NPC_ extends Entity{
 		super(gp);
 		
 		direction = "up";
-		speed = 1;
+		speed = 0;
 		
 		getImage();
 		setDialogue();

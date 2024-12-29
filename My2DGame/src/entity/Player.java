@@ -30,11 +30,11 @@ public class Player extends Entity
 		screenY = gp.screenHeight/2 - (gp.tileSize/2);
 		
 		solidArea = new Rectangle();
-		solidArea.x = 12;
+		solidArea.x = 13;
 		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 22;
+		solidArea.width = 23;
 		solidArea.height = 26;
 		
 		setDefaultValues();
@@ -95,9 +95,16 @@ public class Player extends Entity
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
 			
+			//check npc
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
 			
+			//check event;
+			gp.eHandler.checkEvent();
+			
+			gp.keyH.enterPressed = false;
+			
+			//can move
 			if(collisionOn == false)
 			{
 				switch(direction)
@@ -190,7 +197,6 @@ public class Player extends Entity
 				gp.npc[i].speak();
 			}
 		}
-		gp.keyH.enterPressed = false;
 	}
 	
 	public void draw(Graphics2D g2)
