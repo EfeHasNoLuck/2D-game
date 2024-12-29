@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable
 	
 	//World Settings
 	
-	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public int maxWorldCol; // final 50
+	public int maxWorldRow; // final 50
 	
 	int fps = 60;
 	
@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements Runnable
 		
 		aSetter.setObject();
 		aSetter.setNPC();
-		playMusic(0);
+		playMusic(5,0.8F);
 		gameState = titleState;
 	}
 
@@ -113,7 +113,7 @@ public class GamePanel extends JPanel implements Runnable
 	}
 	
 	public void update(){
-		
+
 		if(gameState == playState) {	
 			player.update();
 			//npc
@@ -183,9 +183,9 @@ public class GamePanel extends JPanel implements Runnable
 		g2.dispose();
 	}
 
-	public void playMusic(int i) {
-		
-		music.setFile(i);
+	public void playMusic(int id, float volume) {
+		music.setFile(id);
+		music.setVolume(volume);
 		music.play();
 		music.loop();
 	}

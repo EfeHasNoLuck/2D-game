@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 public class Sound {
 
@@ -18,6 +19,8 @@ public class Sound {
 		soundURL[2] = getClass().getResource("/sound/powerup.wav");
 		soundURL[3] = getClass().getResource("/sound/unlock.wav");
 		soundURL[4] = getClass().getResource("/sound/fanfare.wav");
+		soundURL[5] = getClass().getResource("/sound/Judas.wav");
+		soundURL[6] = getClass().getResource("/sound/ElderScroll.wav");
 	}
 	
 	public void setFile(int i) {
@@ -30,6 +33,26 @@ public class Sound {
 		}catch(Exception e) {
 		}
 	}
+	
+    public void setVolume(float volume) {
+        if (clip != null) {
+            try {
+                // Map the volume from [0, 1] to [-80.0, 6.0] dB
+                float decibelValue = mapToDecibels(volume);
+
+                // Get the volume control (MASTER_GAIN)
+                FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                volumeControl.setValue(decibelValue);  // Set the volume in dB
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private float mapToDecibels(float volume) {
+        // Map 0 -> -80.0 dB (mute), 1 -> 6.0 dB (max volume)
+        return -80.0f + (volume * 86.0f);  // 86.0 = 6.0 - (-80.0)
+    }
 	
 	public void play() {
 		
