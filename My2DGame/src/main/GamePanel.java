@@ -132,11 +132,16 @@ public class GamePanel extends JPanel implements Runnable
 			//monster
 			for(int i = 0; i < monster.length; i++) {
 				if(monster[i] != null) {
-					monster[i].update();
+					if(monster[i].alive == true) {
+						monster[i].update();
+					}
+					if(monster[i].alive == false && monster[i].dying == false) {
+						monster[i] = null;
+					}		
 				}
 			}
-			
 		}
+		
 		if(gameState == pauseState) {
 			//stop
 		}
@@ -234,6 +239,7 @@ public class GamePanel extends JPanel implements Runnable
 	
 	public void playSE(int i) {
 		
+	    System.out.println("Playing sound index: " + i);
 		se.setFile(i);
 		se.play();
 	}

@@ -43,7 +43,7 @@ public class KeyHandler implements KeyListener {
 				if(gp.ui.commandNum == 0) {
 					gp.gameState = gp.playState;
 					gp.stopMusic();
-					gp.playMusic(6,0.9F);
+					gp.playMusic(6,0.8F);
 				}
 				if(gp.ui.commandNum == 1) {
 					// add later

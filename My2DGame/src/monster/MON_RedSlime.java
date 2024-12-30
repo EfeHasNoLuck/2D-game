@@ -7,8 +7,12 @@ import main.GamePanel;
 
 public class MON_RedSlime extends Entity{
 
+	GamePanel gp;
+	
 	public MON_RedSlime(GamePanel gp) {
 		super(gp);
+		
+		this.gp = gp;
 		
 		type = 2;
 		name = "Red Slime";
@@ -61,6 +65,11 @@ public class MON_RedSlime extends Entity{
 			}
 			actionLockCounter = 0;
 		}
+	}
+	
+	public void damageReaction() {
+		actionLockCounter = 0;
+		direction = gp.player.direction;
 	}
 
 }
