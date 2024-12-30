@@ -1,6 +1,7 @@
 package main;
 
 import entity.NPC_;
+import entity.NPC_Feyza;
 import monster.MON_RedSlime;
 import object.OBJ_Chest;
 import object.OBJ_Door;
@@ -57,17 +58,35 @@ public class AssetSetter {
 		gp.npc[0] = new NPC_(gp);
 		gp.npc[0].worldX = gp.tileSize*21;
 		gp.npc[0].worldY = gp.tileSize*21;
+		
+		gp.npc[1] = new NPC_Feyza(gp);
+		gp.npc[1].worldX = gp.tileSize*25;
+		gp.npc[1].worldY = gp.tileSize*25;
 	}
 	
 	
 	public void setMonster() {
 		
-		gp.monster[0] = new MON_RedSlime(gp);
-		gp.monster[0].worldX = gp.tileSize*10;
-		gp.monster[0].worldY = gp.tileSize*8;
-		
-		gp.monster[0] = new MON_RedSlime(gp);
-		gp.monster[0].worldX = gp.tileSize*10;
-		gp.monster[0].worldY = gp.tileSize*15;
+		int i = 0;
+		gp.monster[i] = new MON_RedSlime(gp);
+		gp.monster[i].worldX = gp.tileSize*10;
+		gp.monster[i].worldY = gp.tileSize*8;
+		i++;
+		gp.monster[i] = new MON_RedSlime(gp);
+		gp.monster[i].worldX = gp.tileSize*15;
+		gp.monster[i].worldY = gp.tileSize*17;
+		i++;
+		gp.monster[i] = new MON_RedSlime(gp);
+		gp.monster[i].worldX = gp.tileSize*18;
+		gp.monster[i].worldY = gp.tileSize*15;
+		i++;
+		gp.monster[i] = new MON_RedSlime(gp);
+		gp.monster[i].worldX = gp.tileSize*19;
+		gp.monster[i].worldY = gp.tileSize*15;
+		i++;
+		gp.monster[i] = new MON_RedSlime(gp);
+		gp.monster[i].worldX = gp.tileSize*11;
+		gp.monster[i].worldY = gp.tileSize*10;
+		i++;
 	}
 }

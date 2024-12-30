@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -22,8 +23,10 @@ public class UI {
 	Font pixelFont;
 	BufferedImage heart_full, heart_half, heart_blank;
 	public boolean messageOn = false;
-	public String message = "";
-	int messageCounter = 0;
+	//public String message = "";
+	//int messageCounter = 0;
+	ArrayList<String> message = new ArrayList<>();
+	ArrayList<Integer> messageCounter = new ArrayList<>();
 	public boolean gameFinished = false;
 	public String currentDialogue = "";
 	public int commandNum = 0;
@@ -52,10 +55,10 @@ public class UI {
 
 	}
 	
-	public void ShowMessage(String text) {
-		
-		message = text;
-		messageOn = true;
+	public void addMessage(String text) {
+
+		message.add(text);
+		messageCounter.add(0);
 	}
 	
 	public void draw(Graphics2D g2) {
@@ -72,6 +75,7 @@ public class UI {
 			if(gp.gameState == gp.playState)
 			{
 				drawPlayerLife();
+				drawMessage();
 			}
 			
 			// PAUSE
@@ -121,7 +125,31 @@ public class UI {
 			x += gp.tileSize/1.4;
 		}
 	}
-	
+	public void drawMessage() {
+		int messageX = gp.tileSize;
+		int messageY = gp.tileSize*4;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 28F));
+		
+		for(int i = 0; i < message.size(); i++) {
+			if(message.get(i) != null) {
+				
+				g2.setColor(Color.black);
+				g2.drawString(message.get(i), messageX+2, messageY+2);
+				g2.setColor(Color.white);
+				g2.drawString(message.get(i), messageX, messageY);
+				
+				int counter = messageCounter.get(i) + 1;
+				messageCounter.set(i, counter);
+				messageY += 50;
+				
+				if(messageCounter.get(i) > 180) {
+					message.remove(i);
+					messageCounter.remove(i);
+				}
+			}
+		}
+		
+	}
 	public void drawTitleScreen() {
 		
 		//background color
@@ -257,7 +285,7 @@ public class UI {
 		
 		int textX = frameX + 20;
 		int textY = frameY + gp.tileSize;
-		final int lineHeight = 33;
+		final int lineHeight = 36;
 		
 		// Names
 		g2.drawString("Level", textX, textY);
@@ -277,15 +305,13 @@ public class UI {
 		g2.drawString("Next Level", textX, textY);
 		textY += lineHeight;
 		g2.drawString("Coin", textX, textY);
-		textY += lineHeight + 10;
+		textY += lineHeight + 20;
 		g2.drawString("Weapon", textX, textY);
-		textY += lineHeight + 15;
+		textY += lineHeight + 13;
 		g2.drawString("Shield", textX, textY);
 		textY += lineHeight + 15;
-		g2.drawString("Dublaj", textX, textY);
-		textY += lineHeight;
 		
-		
+
 		// Values
 		int tailX = (frameX + frameWidth - 30);
 		textY = frameY + gp.tileSize;
@@ -336,11 +362,11 @@ public class UI {
 		g2.drawString(value, textX, textY);
 		textY += lineHeight;
 		
-		g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 20, null);
+		g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 14, null);
 		textY += gp.tileSize;
-		g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 20, null);
+		g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 14, null);
 		textY += gp.tileSize;
-		g2.drawImage(gp.player.dublaj.down1, tailX - gp.tileSize, textY - 20, null);
+
 		
 		
 	}
