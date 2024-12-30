@@ -286,7 +286,7 @@ public class Player extends Entity
 					damage = 0;
 				}
 				
-				gp.monster[i].life -= 1;
+				gp.monster[i].life -= damage;
 				gp.ui.addMessage(damage + " damage!");
 				
 				gp.monster[i].invincible = true;
