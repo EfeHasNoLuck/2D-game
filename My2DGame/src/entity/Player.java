@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Cat;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
 
 public class Player extends Entity
 {
@@ -15,8 +18,9 @@ public class Player extends Entity
 	
 	public final int screenX;
 	public final int screenY;
-	public int hasKey = 0;
+	//public int hasKey = 0;
 	public int standCounter = 0;
+	public boolean attackCanceled = false;
 	
 	public Player(GamePanel gp, KeyHandler keyH)
 	{
@@ -50,8 +54,26 @@ public class Player extends Entity
 		direction = "down";
 		
 		//player status
+		level = 1;
 		maxLife = 6;
 		life = maxLife;
+		strength = 1;
+		dexterity = 1;
+		exp = 0;
+		nextLevelExp = 5;
+		coin = 0;
+		currentWeapon = new OBJ_Sword_Normal(gp);
+		currentShield = new OBJ_Shield_Wood(gp);
+		dublaj = new OBJ_Cat(gp);
+		attack = getAttack();
+		defense = getDefense();
+	}
+	
+	public int getAttack() {
+		return attack = strength * currentWeapon.attackValue;
+	}
+	public int getDefense() {
+		return defense = dexterity * currentShield.defenseValue;
 	}
 	
 	public void getPlayerImage() {
@@ -136,6 +158,12 @@ public class Player extends Entity
 				}
 			}
 			
+			if(keyH.enterPressed == true && attackCanceled == false) {
+				gp.playSE(7);
+				attacking = true;
+				spriteCounter = 0;
+			}
+			attackCanceled = false;
 			gp.keyH.enterPressed = false;
 			
 			spriteCounter++;
@@ -220,40 +248,8 @@ public class Player extends Entity
 	
 	public void pickUpObject(int i)
 	{
-		if(i != 999)
-		{
-			String objectName = gp.obj[i].name;
-			
-			switch(objectName) {
-			case "Key":
-				gp.playSE(1);
-				hasKey++;
-				gp.obj[i] = null;
-				gp.ui.ShowMessage("You got a key!");
-				break;
-			case "Door":
-				if(hasKey > 0){
-					gp.playSE(3);
-					gp.obj[i] = null;
-					hasKey--;
-					gp.ui.ShowMessage("You opened the door!");
-				}
-				else {
-					gp.ui.ShowMessage("You need a key");
-				}
-				break;
-			case "Energy":
-				gp.playSE(2);
-				speed += 1;
-				gp.obj[i] = null;
-				gp.ui.ShowMessage("Speed up!");
-				break;
-			case "Chest":
-				gp.ui.gameFinished = true;
-				gp.stopMusic();
-				gp.playSE(4);
-				break;
-			}
+		if(i != 999)  {
+
 		}
 	}
 	
@@ -262,12 +258,9 @@ public class Player extends Entity
 		if(gp.keyH.enterPressed == true) {
 			
 			if(i != 999) {
+				attackCanceled = true;
 				gp.gameState = gp.dialogueState;
 				gp.npc[i].speak();
-			}
-			else {
-				gp.playSE(7);
-				attacking = true;
 			}
 		}
 	}

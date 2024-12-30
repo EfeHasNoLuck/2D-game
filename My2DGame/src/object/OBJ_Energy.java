@@ -11,6 +11,5 @@ public class OBJ_Energy extends Entity{
 		
 		name = "Energy";
 		down1 = setup("/objects/energy");
-
 	}
 }
