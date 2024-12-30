@@ -12,3 +12,5 @@ true
 true
 006.png
 false
+007.png
+false

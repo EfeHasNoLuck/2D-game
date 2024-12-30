@@ -27,12 +27,15 @@ public class Player extends Entity
 		screenY = gp.screenHeight/2 - (gp.tileSize/2);
 		
 		solidArea = new Rectangle();
-		solidArea.x = 13;
-		solidArea.y = 16;
+		solidArea.x = 13; //8
+		solidArea.y = 16;  //16
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 23;
-		solidArea.height = 26;
+		solidArea.width = 23;  //32
+		solidArea.height = 26;   //32
+		
+		attackArea.width = 36;
+		attackArea.height = 36;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -178,6 +181,35 @@ public class Player extends Entity
 		}
 		if(spriteCounter > 5 && spriteCounter <= 25) {
 			spriteNum = 2;
+			
+			// save the current worldX, worldY, solidArea
+			int currentWorldX = worldX;
+			int currentWorldY = worldY;
+			int solidAreaWidth = solidArea.width;
+			int solidAreaHeight = solidArea.height;
+			
+			//Adjust player's worldX/Y for the attackArea
+			switch(direction) {
+			case "up":  worldY -= attackArea.height;  break;
+			case "down":  worldY += attackArea.height;  break;
+			case "left":  worldX -= attackArea.width; break;
+			case "right": worldX += attackArea.width; break;
+			}
+			
+			//attackArea becomes solidArera
+			solidArea.width = attackArea.width;
+			solidArea.height = attackArea.height;
+			
+			//check monster collision with updated position and area
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			damageMonster(monsterIndex);
+			
+			//after collision, back to original data
+			worldX = currentWorldX;
+			worldY = currentWorldY;
+			solidArea.width = solidAreaWidth;
+			solidArea.height = solidAreaHeight;
+			
 		}
 		if(spriteCounter > 25) {
 			spriteNum = 1;
@@ -250,6 +282,20 @@ public class Player extends Entity
 			
 		}
 	}
+	public void damageMonster(int i) {
+		
+		if(i != 999) {
+			if(gp.monster[i].invincible == false) {
+				
+				gp.monster[i].life -= 1;
+				gp.monster[i].invincible = true;
+				
+				if(gp.monster[i].life <= 0) {
+					gp.monster[i] = null;
+				}
+			}
+		}
+	}
 	
 	public void draw(Graphics2D g2)	{
 		
@@ -310,7 +356,7 @@ public class Player extends Entity
 		}
 		
 		if(invincible == true) {
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
 		}
 		
 		g2.drawImage(image, tempScreenX, tempScreenY, null);
