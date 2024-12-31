@@ -205,7 +205,7 @@ public class Player extends Entity
 			
 			shotAvailableCounter = 0;
 			
-			gp.playSE(3);
+			gp.playSE(12);
 		}
 		
 		//outside of key if
