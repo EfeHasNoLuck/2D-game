@@ -1,0 +1,16 @@
+000.png
+true
+001.png
+false
+002.png
+false
+003.png
+true
+004.png
+true
+005.png
+true
+006.png
+false
+007.png
+false
