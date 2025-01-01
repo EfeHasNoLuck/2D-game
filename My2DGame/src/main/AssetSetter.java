@@ -1,8 +1,10 @@
 package main;
 
 import entity.NPC_;
+import entity.NPC_Eray;
 import entity.NPC_Feyza;
 import monster.MON_RedSlime;
+import object.OBJ_Axe;
 import object.OBJ_Chest;
 import object.OBJ_Coin_tl;
 import object.OBJ_Door;
@@ -67,6 +69,10 @@ public class AssetSetter {
 		gp.obj[i] = new OBJ_ManaCrystal(gp);
 		gp.obj[i].worldX = 13 * gp.tileSize;
 		gp.obj[i].worldY = 13 * gp.tileSize;
+		
+		gp.obj[i] = new OBJ_Axe(gp);
+		gp.obj[i].worldX = 27 * gp.tileSize;
+		gp.obj[i].worldY = 27 * gp.tileSize;
 	}
 	
 	
@@ -79,6 +85,10 @@ public class AssetSetter {
 		gp.npc[1] = new NPC_Feyza(gp);
 		gp.npc[1].worldX = gp.tileSize*25;
 		gp.npc[1].worldY = gp.tileSize*25;
+		
+		gp.npc[2] = new NPC_Eray(gp);
+		gp.npc[2].worldX = gp.tileSize*26;
+		gp.npc[2].worldY = gp.tileSize*26;
 	}
 	
 	

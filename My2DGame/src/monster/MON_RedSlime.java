@@ -4,6 +4,9 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
+import object.OBJ_Coin_tl;
+import object.OBJ_Heart;
+import object.OBJ_ManaCrystal;
 import object.OBJ_Plasma;
 
 public class MON_RedSlime extends Entity{
@@ -83,5 +86,20 @@ public class MON_RedSlime extends Entity{
 		actionLockCounter = 0;
 		direction = gp.player.direction;
 	}
-
+	public void checkDrop() {
+		
+		//cast a die
+		int i = new Random().nextInt(100)+1;
+		
+		//monster drop
+		if(i < 50) {
+			dropItem(new OBJ_Coin_tl(gp));
+		}
+		if(i >= 50 && i < 75) {
+			dropItem(new OBJ_Heart(gp));
+		}
+		if(i >= 75 && i < 100) {
+			dropItem(new OBJ_ManaCrystal(gp));
+		}
+	}
 }
