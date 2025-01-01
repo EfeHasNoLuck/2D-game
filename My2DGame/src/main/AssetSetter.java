@@ -4,9 +4,12 @@ import entity.NPC_;
 import entity.NPC_Feyza;
 import monster.MON_RedSlime;
 import object.OBJ_Chest;
+import object.OBJ_Coin_tl;
 import object.OBJ_Door;
 import object.OBJ_Energy;
+import object.OBJ_Heart;
 import object.OBJ_Key;
+import object.OBJ_ManaCrystal;
 import object.OBJ_Potion_Red;
 
 public class AssetSetter {
@@ -21,11 +24,11 @@ public class AssetSetter {
 	public void setObject() {
 		
 		int i = 0;
-		gp.obj[i] = new OBJ_Key(gp);
+		gp.obj[i] = new OBJ_Coin_tl(gp);
 		gp.obj[i].worldX = 23 * gp.tileSize;
 		gp.obj[i].worldY = 7 * gp.tileSize;
 		i++;
-		gp.obj[i] = new OBJ_Key(gp);
+		gp.obj[i] = new OBJ_Coin_tl(gp);
 		gp.obj[i].worldX = 23 * gp.tileSize;
 		gp.obj[i].worldY = 40 * gp.tileSize;
 		i++;
@@ -56,6 +59,14 @@ public class AssetSetter {
 		gp.obj[i] = new OBJ_Potion_Red(gp);
 		gp.obj[i].worldX = 3 * gp.tileSize;
 		gp.obj[i].worldY = 3 * gp.tileSize;
+		i++;
+		gp.obj[i] = new OBJ_Heart(gp);
+		gp.obj[i].worldX = 15 * gp.tileSize;
+		gp.obj[i].worldY = 15 * gp.tileSize;
+		i++;
+		gp.obj[i] = new OBJ_ManaCrystal(gp);
+		gp.obj[i].worldX = 13 * gp.tileSize;
+		gp.obj[i].worldY = 13 * gp.tileSize;
 	}
 	
 	
