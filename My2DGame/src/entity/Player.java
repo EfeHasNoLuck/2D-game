@@ -144,22 +144,24 @@ public class Player extends Entity
 				direction = "right";
 			}
 			
-			//check tile
+			//check tile collision
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
 			
-			//check object
+			//check object collision
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
 			
-			//check npc
+			//check npc collision
 			int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
 			
-			//check monster
+			//check monster collision
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			contactMonster(monsterIndex);
 			
+			// check interactive tile 
+			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
 			
 			//check event;
 			gp.eHandler.checkEvent();
@@ -275,6 +277,9 @@ public class Player extends Entity
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			damageMonster(monsterIndex, attack);
 			
+			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+			damageInteractiveTile(iTileIndex);
+			
 			//after collision, back to original data
 			worldX = currentWorldX;
 			worldY = currentWorldY;
@@ -372,6 +377,18 @@ public class Player extends Entity
 					exp += gp.monster[i].exp;
 					checkLevelUp();
 				}
+			}
+		}
+	}
+	public void damageInteractiveTile(int i) {
+		if(i != 999 && gp.iTile[i].destructible == true && gp.iTile[i].isCorrectItem(this) == true && gp.iTile[i].invincible == false) {
+			
+			gp.iTile[i].playSE();
+			gp.iTile[i].life--;
+			gp.iTile[i].invincible = true;
+			
+			if(gp.iTile[i].life == 0) {
+				gp.iTile[i] = gp.iTile[i].getDestroyedForm();
 			}
 		}
 	}

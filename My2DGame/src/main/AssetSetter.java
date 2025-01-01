@@ -13,6 +13,7 @@ import object.OBJ_Heart;
 import object.OBJ_Key;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Potion_Red;
+import tile_interactive.IT_DryTree;
 
 public class AssetSetter {
 
@@ -115,5 +116,15 @@ public class AssetSetter {
 		gp.monster[i].worldX = gp.tileSize*11;
 		gp.monster[i].worldY = gp.tileSize*10;
 		i++;
+	}
+	
+	public void setInteractiveTile() {
+		
+		int i = 0;
+		gp.iTile[i] = new IT_DryTree(gp,28,28);i++;
+		gp.iTile[i] = new IT_DryTree(gp,29,28);i++;
+		gp.iTile[i] = new IT_DryTree(gp,30,28);i++;
+		gp.iTile[i] = new IT_DryTree(gp,31,28);i++;
+		gp.iTile[i] = new IT_DryTree(gp,32,28);i++;
 	}
 }
