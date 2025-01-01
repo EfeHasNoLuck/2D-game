@@ -12,8 +12,8 @@ public class OBJ_ManaCrystal extends Entity{
 		this.gp = gp;
 		
 		name = "Mana Crystal";
-		image = setup("/objects/manacrystal_full");
-		image2 = setup("/objects/manacrystal_blank");
+		image = setup("/objects/lethal_company_1");
+		image2 = setup("/objects/lethal_company_2");
 	}
 
 }
