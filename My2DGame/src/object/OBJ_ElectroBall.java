@@ -1,5 +1,6 @@
 package object;
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -12,7 +13,7 @@ public class OBJ_ElectroBall extends Projectile{
 		this.gp = gp;
 		
 		name = "ElectroBall";
-		speed = 10;
+		speed = 8;
 		maxLife = 80;
 		life = maxLife;
 		attack = 2;
@@ -31,5 +32,16 @@ public class OBJ_ElectroBall extends Projectile{
 		right1 = setup("/projectile/purple_right_1");
 		right2 = setup("/projectile/purple_right_2");
 	}
-
+	
+	public boolean haveResource(Entity user) {
+		boolean haveResource = false;
+		if(user.mana >= useCost) {
+			haveResource = true;
+		}
+		return haveResource;
+ 	}
+	
+	public void subtractResource(Entity user) {
+		user.mana -= useCost;
+	}
 }

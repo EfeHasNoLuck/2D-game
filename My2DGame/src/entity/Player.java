@@ -53,10 +53,12 @@ public class Player extends Entity
 		speed = 4;
 		direction = "down";
 		
-		//player status
+		//player status;
 		level = 1;
 		maxLife = 6;
 		life = maxLife;
+		maxMana = 4;
+		mana = maxMana;
 		strength = 1;
 		dexterity = 1;
 		exp = 0;
@@ -195,10 +197,13 @@ public class Player extends Entity
 			}
 		}
 		
-		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30) {
+		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
 			
 			//set coordinates, direction and user;
 			projectile.set(worldX, worldY, direction, true, this);
+			
+			//subtract the cost (mana, etc.)
+			projectile.subtractResource(this);
 			
 			//add to list
 			gp.projectileList.add(projectile);
