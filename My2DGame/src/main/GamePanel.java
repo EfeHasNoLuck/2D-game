@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable
 	final int scale = 3;
 	
 	public final int tileSize = originalTileSize * scale; // 48x48
-	public final int maxScreenCol = 16;
+	public final int maxScreenCol = 20;
 	public final int maxScreenRow = 12;
 	public final int screenWidth = maxScreenCol * tileSize; //768
 	public final int screenHeight = maxScreenRow * tileSize; //576 
@@ -32,6 +32,16 @@ public class GamePanel extends JPanel implements Runnable
 	public int maxWorldCol; // final 50
 	public int maxWorldRow; // final 50
 	
+	//For Full Screen
+	//int screenWidth2 = screenWidth;
+	//int screenHeight2 = screenHeight;
+	//BufferedImage tempScreen;
+	//Graphics2D g2;
+	public boolean fullScreenOn = false;
+	
+	
+	
+	//fps
 	int fps = 60;
 	
 	//SYSTEM
@@ -62,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable
 	public final int pauseState = 2;
 	public final int dialogueState = 3;
 	public final int characterState = 4;
+	public final int optionsState = 5;
 	
 	public GamePanel()
 	{
@@ -116,6 +127,7 @@ public class GamePanel extends JPanel implements Runnable
 			if(timer >= 1000000000)
 			{
 				{
+					//System.out.println("Fps:" + drawCount); 
 					drawCount = 0;
 					timer = 0;
 				}
@@ -124,7 +136,6 @@ public class GamePanel extends JPanel implements Runnable
 	}
 	
 	public void update(){
-
 		if(gameState == playState) {	
 			//player
 			player.update();
@@ -182,17 +193,14 @@ public class GamePanel extends JPanel implements Runnable
 			//stop
 		}
 	}
-	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		
 		
 		long start = 0;
 		if(keyH.debug == true){
 			start = System.nanoTime();
 		}
-		
 		
 		// TITLE SCREEN
 		if(gameState == titleState) {
@@ -203,7 +211,6 @@ public class GamePanel extends JPanel implements Runnable
 		else {
 			// TILE
 			tileM.draw(g2);
-			
 			// Interactive tile
 			for(int i = 0; i<iTile.length; i++) {
 				if(iTile[i] != null) {
@@ -266,8 +273,6 @@ public class GamePanel extends JPanel implements Runnable
 		}
 		
 		// TILE
-	
-		
 		if(keyH.debug == true) {
 			
 			long end = System.nanoTime();
@@ -285,10 +290,11 @@ public class GamePanel extends JPanel implements Runnable
 			g2.drawString("Row" + (player.worldY + player.solidArea.y)/tileSize, x, y);	y += lineHeight;
 			g2.drawString("diff: " + diff, x, y);
 		}
-				
-		g2.dispose();
+		
+			g2.dispose();
+		
 	}
-
+	
 	public void playMusic(int id, float volume) {
 		music.setFile(id);
 		music.setVolume(volume);

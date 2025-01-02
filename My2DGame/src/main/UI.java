@@ -31,6 +31,7 @@ public class UI {
 	public int commandNum = 0; // 0-first scene, 1-second scene
 	public int slotCol = 0;
 	public int slotRow = 0;
+	int subState = 0;
 	
 	double playTime;
 	DecimalFormat dFormat = new DecimalFormat("#0.00");
@@ -57,17 +58,17 @@ public class UI {
 		crystal_blank = crystal.image2;
 
 	}
-	
 	public void addMessage(String text) {
 
 		message.add(text);
 		messageCounter.add(0);
 	}
-	
 	public void draw(Graphics2D g2) {
 		
 		this.g2 = g2;
 		g2.setFont(pixelFont);
+		
+		System.out.println(gp.gameState);
 
 			// TITLE STATE
 			if(gp.gameState == gp.titleState) {
@@ -92,30 +93,36 @@ public class UI {
 				drawDialogueScreen();
 			}
 			
-			// Character state
+			// CHAR STATE
 			if(gp.gameState == gp.characterState) {
+				System.out.println("char");
 				drawCharacterScreen();
 				drawInventory();
 			}
-		}	
+
+			//OPTIONS
+			if(gp.gameState == gp.optionsState) {
+
+				drawOptionsScreen();
+			}
 		
-	
+		}	
 	public void drawPlayerLife() {
 		
-		int x = gp.tileSize/2;
-		int y = gp.tileSize/2;
+		int x = gp.tileSize/2 - 5;
+		int y = gp.tileSize/2 - 5;
 		int i = 0;
 		
 		// draw blank
 		while(i < gp.player.maxLife/2) {
 			g2.drawImage(heart_blank, x, y, null);
 			i++;
-			x += gp.tileSize/1.4;
+			x += 35;
 		}
 		
 		// draw reset
-		x = gp.tileSize/2;
-		y = gp.tileSize/2;
+		x = gp.tileSize/2 - 5;
+		y = gp.tileSize/2 - 5;
 		i = 0;
 		
 		// draw current
@@ -126,7 +133,7 @@ public class UI {
 				g2.drawImage(heart_full, x, y, null);
 			}
 		i++;
-			x += gp.tileSize/1.4;
+			x += 35;
 		}
 		
 		// Draw max mana
@@ -215,7 +222,7 @@ public class UI {
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
 		g2.setColor(Color.white);
 		
-		text = "NEW GAME";
+		text = "YENİ OYUN";
 		x = getXCenter(text);
 		y += gp.tileSize*5;
 		//shadow
@@ -233,7 +240,7 @@ public class UI {
 			g2.drawString(">", x-gp.tileSize, y);
 		}
 		
-		text = "LOAD GAME";
+		text = "KAYITLI OYUN";
 		x = getXCenter(text);
 		y += gp.tileSize;
 		//shadow
@@ -251,7 +258,7 @@ public class UI {
 			g2.drawString(">", x-gp.tileSize, y);
 		}
 		
-		text = "QUIT";
+		text = "ÇIKIŞ";
 		x = getXCenter(text);
 		y += gp.tileSize;
 		//shadow
@@ -298,7 +305,7 @@ public class UI {
 	public void drawCharacterScreen() {
 		
 		// Frame
-		final int frameX = gp.tileSize;
+		final int frameX = gp.tileSize*2;
 		final int frameY = gp.tileSize;
 		final int frameWidth = gp.tileSize*5;
 		final int frameHeight = gp.tileSize*10;
@@ -313,18 +320,18 @@ public class UI {
 		final int lineHeight = 36;
 		
 		// Names
-		g2.drawString("Level", textX, textY);  textY += lineHeight;
-		g2.drawString("Life", textX, textY);  textY += lineHeight;
+		g2.drawString("Seviye", textX, textY);  textY += lineHeight;
+		g2.drawString("Can", textX, textY);  textY += lineHeight;
 		g2.drawString("Mana", textX, textY);  textY += lineHeight;
-		g2.drawString("Strength", textX, textY);  textY += lineHeight;
-		g2.drawString("Dexterity", textX, textY);  textY += lineHeight;
-		g2.drawString("Attack", textX, textY);  textY += lineHeight;
-		g2.drawString("Defense", textX, textY);  textY += lineHeight;
-		g2.drawString("Exp", textX, textY);  textY += lineHeight;
-		g2.drawString("Next Level", textX, textY);  textY += lineHeight;
-		g2.drawString("Coin", textX, textY);  textY += lineHeight + 10;
-		g2.drawString("Weapon", textX, textY);  textY += lineHeight + 10;
-		g2.drawString("Shield", textX, textY);  textY += lineHeight;
+		g2.drawString("Kuvvet", textX, textY);  textY += lineHeight;
+		g2.drawString("Çeviklik", textX, textY);  textY += lineHeight;
+		g2.drawString("Saldırı", textX, textY);  textY += lineHeight;
+		g2.drawString("Savunma", textX, textY);  textY += lineHeight;
+		g2.drawString("XP", textX, textY);  textY += lineHeight;
+		g2.drawString("Gereken XP", textX, textY);  textY += lineHeight;
+		g2.drawString("Türk Lirası", textX, textY);  textY += lineHeight + 10;
+		g2.drawString("Silah", textX, textY);  textY += lineHeight + 10;
+		g2.drawString("Kalkan", textX, textY);  textY += lineHeight;
 		
 
 		// Values
@@ -390,7 +397,7 @@ public class UI {
 	public void drawInventory() {
 		
 		//Frame
-		int frameX = gp.tileSize*9;
+		int frameX = gp.tileSize*12;
 		int frameY = gp.tileSize;
 		int frameWidth = gp.tileSize*6;
 		int frameHeight = gp.tileSize*5;
@@ -453,6 +460,224 @@ public class UI {
 			for(String line: gp.player.inventory.get(itemIndex).description.split("\n")) {
 				g2.drawString(line, textX, textY);
 				textY += 32;
+			}
+		}
+		
+	}
+	public void drawOptionsScreen() {
+		
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(32F));
+		
+		// SUB WINDOW
+		int frameX = gp.tileSize*6;
+		int frameY = gp.tileSize;
+		int frameWidth = gp.tileSize*8;
+		int frameHeight = gp.tileSize*10;
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+		
+		switch(subState) {
+		case 0: options_top(frameX, frameY); break;
+		case 1: options_fullScreenNotification(frameX, frameY); break;
+		case 2: options_control(frameX, frameY); break;
+		case 3: options_endGameConfirmation(frameX, frameY); break;
+		}
+		
+		gp.keyH.enterPressed = false;
+	}
+	public void options_top(int frameX, int frameY) {
+		
+		int textX;
+		int textY;
+		
+		// Title
+		String text = "Seçenekler";
+		textX = getXCenter(text);
+		textY = frameY + gp.tileSize;
+		g2.drawString(text, textX, textY);
+		
+		// Full Screen .... it is not working now we had an error while doing it
+		textX = frameX + gp.tileSize;
+		textY += gp.tileSize*2;
+		g2.drawString("Tam Ekran", textX, textY);
+		if(commandNum == 0) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				gp.fullScreenOn = !gp.fullScreenOn;
+				
+				subState = 1;
+			}
+		}
+		
+		// Music
+		textY += gp.tileSize;
+		g2.drawString("Müzik", textX, textY);
+		if(commandNum == 1) {
+			g2.drawString(">", textX-25, textY);
+		}
+		
+		// SE
+		textY += gp.tileSize;
+		g2.drawString("Efekt", textX, textY);
+		if(commandNum == 2) {
+			g2.drawString(">", textX-25, textY);
+		}
+		
+		// Control
+		textY += gp.tileSize;
+		g2.drawString("Kontroller", textX, textY);
+		if(commandNum == 3) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				subState = 2;
+				commandNum = 0;
+			}
+		}
+		
+		// End Game
+		textY += gp.tileSize;
+		g2.drawString("Oyundan Çık", textX, textY);
+		if(commandNum == 4) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				subState = 3;
+				commandNum = 0;
+			}
+		}
+		
+		// Back
+		textY += gp.tileSize * 2;
+		g2.drawString("Geri", textX, textY);
+		if(commandNum == 5) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				gp.gameState = gp.playState;
+				commandNum = 0;
+			}
+		}
+		
+		// Full Screen Check Box
+		textX = frameX + (int)(gp.tileSize*4.5);
+		textY = frameY + gp.tileSize*2 + gp.tileSize/2;
+		g2.setStroke(new BasicStroke(3));
+		g2.drawRect(textX, textY, gp.tileSize/2, gp.tileSize/2);
+		if(gp.fullScreenOn == true) {
+			g2.fillRect(textX, textY, gp.tileSize/2, gp.tileSize/2);
+		}
+		
+		// Music Volume
+		textY += gp.tileSize;
+		g2.drawRect(textX, textY, 120, 24); 
+		int volumeWidth = 24 * gp.music.volumeScale;
+		g2.fillRect(textX, textY, volumeWidth, gp.tileSize/2);
+		
+		// SE Volume
+		textY += gp.tileSize;
+		g2.drawRect(textX, textY, 120, 24);
+		volumeWidth = 24 * gp.se.volumeScale;
+		g2.fillRect(textX, textY, volumeWidth, gp.tileSize/2);
+		
+	}
+	public void options_fullScreenNotification(int frameX, int frameY) {
+		
+		int textX = frameX + gp.tileSize;
+		int textY = frameY + gp.tileSize*3;
+		
+	//currentDialogue = "The change will take \neffect after restarting \nthe game.";
+		currentDialogue = "Tam ekran özelliği \nmalesef şuan da \nçalışmamaktadır.";
+		for(String line: currentDialogue.split("\n")) {
+			g2.drawString(line, textX, textY);
+			textY += 40;
+		}
+			
+		// BACK 
+		textY = frameY + gp.tileSize*9;
+		g2.drawString("Geri", textX, textY);
+		if(commandNum == 0) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				subState = 0;
+			}
+		}
+	}
+	public void options_control(int frameX, int frameY) {
+		
+		int textX;
+		int textY;
+		
+		// Title
+		String text = "Kontroller";
+		textX = getXCenter(text);
+		textY = frameY + gp.tileSize;
+		g2.drawString(text, textX, textY);
+		
+		textX = frameX + gp.tileSize;
+		textY += gp.tileSize;
+		g2.drawString("Hareket", textX, textY); textY += gp.tileSize;
+		g2.drawString("Etkileşim/Saldırı", textX, textY); textY += gp.tileSize;
+		g2.drawString("Büyü", textX, textY); textY += gp.tileSize;
+		g2.drawString("Karakter Ekranı", textX, textY); textY += gp.tileSize;
+		g2.drawString("Durdurma", textX, textY); textY += gp.tileSize;
+		g2.drawString("Seçenekler", textX, textY); textY += gp.tileSize;
+		
+		textX = frameX + gp.tileSize*6;
+		textY = frameY + gp.tileSize*2;
+		g2.drawString("WASD", textX, textY); textY += gp.tileSize;
+		g2.drawString("ENTER", textX, textY); textY += gp.tileSize;
+		g2.drawString("F", textX, textY); textY += gp.tileSize;
+		g2.drawString("C", textX, textY); textY += gp.tileSize;
+		g2.drawString("P", textX, textY); textY += gp.tileSize;
+		g2.drawString("ESC", textX, textY); textY += gp.tileSize;
+		
+		// Back
+		textX = frameX + gp.tileSize;
+		textY = frameY + gp.tileSize*9;
+		g2.drawString("Geri", textX, textY);
+		if(commandNum == 0) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				subState = 0;
+				commandNum = 3;
+			}
+		}
+		
+	}
+	public void options_endGameConfirmation(int frameX, int frameY) {
+		
+		int textX = frameX + gp.tileSize;
+		int textY = frameY + gp.tileSize*3;
+		
+		currentDialogue = "Oyundan çıkıp \nana menüye dönmek\nistediğine emin misin?";
+		for(String line: currentDialogue.split("\n")) {
+			g2.drawString(line, textX, textY);
+			textY += 40;
+		}
+		
+		//Yes
+		String text = "Evet";
+		textX = getXCenter(text);
+		textY += gp.tileSize*3;
+		g2.drawString(text, textX, textY);
+		if(commandNum == 0) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				subState = 0;
+				gp.gameState = gp.titleState;
+				gp.stopMusic();
+				gp.playMusic(5,0.8F);
+			}
+		}
+		
+		//No
+		text = "No";
+		textX = getXCenter(text);
+		textY += gp.tileSize;
+		g2.drawString(text, textX, textY);
+		if(commandNum == 1) {
+			g2.drawString(">", textX-25, textY);
+			if(gp.keyH.enterPressed == true) {
+				subState = 0;
+				commandNum = 4;
 			}
 		}
 		
