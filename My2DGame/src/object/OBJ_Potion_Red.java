@@ -25,7 +25,7 @@ public class OBJ_Potion_Red  extends Entity{
 		gp.ui.currentDialogue = "you drink the " + name + "!\n" 
 				+ "Your life has been recovered by " + value + ".";
 		entity.life += value;
-		gp.playSE(3);
+		gp.playSE(18);
 	}
 
 }

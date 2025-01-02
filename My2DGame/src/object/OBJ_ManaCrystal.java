@@ -21,8 +21,8 @@ public class OBJ_ManaCrystal extends Entity{
 
 	public void use(Entity entity) {
 		
-		gp.playSE(3);
 		gp.ui.addMessage("Mana +" + value);
 		entity.mana += value;
+		gp.playSE(17);
 	}
 }
