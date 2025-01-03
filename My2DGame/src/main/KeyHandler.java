@@ -241,7 +241,13 @@ public class KeyHandler implements KeyListener {
 				gp.gameState = gp.playState;
 				gp.retry();
 				gp.stopMusic();
-				gp.playMusic(6, 0.8F);
+				if(gp.currentMap == 0) {
+					gp.playMusic(6, 0.8F);
+				}
+				if(gp.currentMap == 1) {
+					gp.playMusic(18, 0.8F);
+				}
+
 			}
 			else if(gp.ui.commandNum == 1) {
 				gp.gameState = gp.titleState;

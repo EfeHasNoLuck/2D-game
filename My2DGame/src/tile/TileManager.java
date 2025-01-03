@@ -16,7 +16,7 @@ public class TileManager {
 
 	GamePanel gp;
 	public Tile[] tile;
-	public int mapTileNum[][];
+	public int mapTileNum[][][];
 	//new tile system lists
 	ArrayList<String> fileNames = new ArrayList<>();
 	ArrayList<String> collisionStatus = new ArrayList<>();
@@ -26,8 +26,9 @@ public class TileManager {
 		this.gp = gp;
 		
 		// Read tile data file
-		InputStream is = getClass().getResourceAsStream("/maps/tiledata.txt");
+		InputStream is = getClass().getResourceAsStream("/maps/tile_updated.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
+		
 		//get tile name and collision
 		String line;
 		try {
@@ -35,6 +36,8 @@ public class TileManager {
 				fileNames.add(line);
 				collisionStatus.add(br.readLine());
 			}
+			br.close();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +55,7 @@ public class TileManager {
 			
 			gp.maxWorldCol = maxTile.length;
 			gp.maxWorldRow = maxTile.length;
-			mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+			mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 			
 			br.close();
 			
@@ -64,7 +67,8 @@ public class TileManager {
 		//mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		//getTileImage();
-		loadMap("/maps/sample.txt");
+		loadMap("/maps/sample.txt", 0);
+		loadMap("/maps/dungeon_map_updated.txt", 1);
 	}
 	
 	public void getTileImage()
@@ -92,14 +96,13 @@ public class TileManager {
 		//setup(4, "tree", true);
 		//setup(5, "sand", false);
 	}
-	
 	public void setup(int index, String imageName, boolean collision)
 	{
 		UtilityTool uTool = new UtilityTool();
 	
 		try {
 			tile[index] = new Tile();
-			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName));  //("/tiles/" + imageName + ".png"));
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tilesU/" + imageName));  //("/tiles/" + imageName + ".png"));
 			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
 			tile[index].collision = collision;
 		}
@@ -109,8 +112,7 @@ public class TileManager {
 		}
 		
 	}
-	
-	public void loadMap(String filePath)
+	public void loadMap(String filePath, int map)
 	{
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
@@ -128,7 +130,7 @@ public class TileManager {
 					
 					int num = Integer.parseInt(numbers[col]);
 					
-					mapTileNum[col][row] = num;
+					mapTileNum[map][col][row] = num;
 					col++;
 				}
 				if(col == gp.maxWorldCol)
@@ -153,7 +155,7 @@ public class TileManager {
 		
 		while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow)
 		{
-			int tileNum = mapTileNum[worldCol][worldRow];
+			int tileNum = mapTileNum[gp.currentMap][worldCol][worldRow];
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;

@@ -42,7 +42,7 @@ public class NPC_Eray extends Entity {
 	public void setAction() {
 
 		actionLockCounter++;
-		int time = 5;
+		int time = 4;
 		
 		if(actionLockCounter > 0 && actionLockCounter <= time) {
 			direction = "up";
