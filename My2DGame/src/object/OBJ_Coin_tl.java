@@ -17,10 +17,11 @@ public class OBJ_Coin_tl extends Entity{
 		down1 = setup("/objects/Coin_tl");
 	}
 
-	public void use(Entity entity) {
+	public boolean use(Entity entity) {
 		
 		gp.playSE(3);
 		gp.ui.addMessage("Coin +" + value);
 		gp.player.coin += value;
+		return true;
 	}
 }
