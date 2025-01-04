@@ -3,6 +3,7 @@ package main;
 import entity.NPC_;
 import entity.NPC_Eray;
 import entity.NPC_Feyza;
+import entity.NPC_Merchant;
 import monster.MON_RedSlime;
 import object.OBJ_Axe;
 import object.OBJ_Chest;
@@ -95,6 +96,13 @@ public class AssetSetter {
 		gp.npc[mapNum][i] = new NPC_Eray(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*26;
 		gp.npc[mapNum][i].worldY = gp.tileSize*26;
+		
+		mapNum = 1;
+		i = 0;
+		gp.npc[mapNum][i] = new NPC_Merchant(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*42;
+		gp.npc[mapNum][i].worldY = gp.tileSize*17;
+		i++;
 	}
 	
 	

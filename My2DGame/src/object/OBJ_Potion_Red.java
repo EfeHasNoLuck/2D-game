@@ -17,6 +17,7 @@ public class OBJ_Potion_Red  extends Entity{
 		value = 5;
 		down1 = setup("/objects/potion_red");
 		description = "[Red Potion]\nHeals your life by " + value + ".";
+		price = 25;
 	}
 	
 	public void use(Entity entity) {
@@ -25,7 +26,7 @@ public class OBJ_Potion_Red  extends Entity{
 		gp.ui.currentDialogue = "you drink the " + name + "!\n" 
 				+ "Your life has been recovered by " + value + ".";
 		entity.life += value;
-		gp.playSE(18);
+		gp.playSE(19);
 	}
 
 }
