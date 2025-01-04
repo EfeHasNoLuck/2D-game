@@ -14,10 +14,11 @@ public class OBJ_Plasma extends Projectile{
 		this.gp = gp;
 		
 		name = "Plasma";
-		speed = 8;
+		speed = 7;
 		maxLife = 80;
 		life = maxLife;
 		attack = 2;
+		knockBackPower = 0;
 		useCost = 1;
 		alive = false;
 		getImage();

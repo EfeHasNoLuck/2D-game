@@ -20,7 +20,8 @@ public class MON_RedSlime extends Entity{
 		
 		type = type_monster;
 		name = "Red Slime";
-		speed = 1;
+		defaultSpeed = 1;
+		speed = defaultSpeed;
 		maxLife = 5;
 		life = maxLife;
 		attack = 5;
@@ -82,8 +83,20 @@ public class MON_RedSlime extends Entity{
 			
 			int i = new Random().nextInt(100)+1;
 			if(i > 98 && projectile.alive == false && shotAvailableCounter == 30) {
+
 				projectile.set(worldX, worldY, direction, true, this);
-				gp.projectileList.add(projectile);
+//				gp.projectileList.add(projectile);
+				
+				// check vacancy
+				for(int j = 0; j < gp.projectile[1].length; j++) {
+					if(gp.projectile[gp.currentMap][j] == null) {
+						gp.projectile[gp.currentMap][j] = projectile;
+						break;
+					}
+				}
+				
+				
+				
 				shotAvailableCounter = 0;
 			}
 		}
