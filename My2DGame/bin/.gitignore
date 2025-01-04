@@ -1,15 +1,5 @@
-/sound/
+/ai/
 /main/
 /entity/
-/object/
-/objects/
-/monster/
-/projectile/
-/npc/
-/player/
-/tiles_interactive/
-/tile_interactive/
-/tiles/
-/maps/
 /tile/
-/tilesU/
+/monster/
