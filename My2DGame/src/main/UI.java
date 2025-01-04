@@ -216,7 +216,7 @@ public class UI {
 		}
 		//title name
 		//g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
-		String text = "ISTUN'e Hoş geldin";
+		String text = "ISTÜN'e Hoş geldin";
 		int x = getXCenter(text);
 		int y = gp.tileSize * 3;
 		
@@ -294,7 +294,7 @@ public class UI {
 	public void drawPauseScreen() {
 		
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80));
-		String text = "PAUSED";
+		String text = "DURDURULDU";
 		int x = getXCenter(text);
 		int y = gp.screenHeight/2;
 		

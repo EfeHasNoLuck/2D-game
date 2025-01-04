@@ -413,14 +413,14 @@ public class Player extends Entity
 				}
 				
 				gp.monster[gp.currentMap][i].life -= damage;
-				gp.ui.addMessage(damage + " damage!");
+				gp.ui.addMessage(damage + " hasar!");
 				
 				gp.monster[gp.currentMap][i].invincible = true;
 				gp.monster[gp.currentMap][i].damageReaction();
 				
 				if(gp.monster[gp.currentMap][i].life <= 0) {
 					gp.monster[gp.currentMap][i].dying = true;
-					gp.ui.addMessage("killed the " + gp.monster[gp.currentMap][i].name + "!");
+					gp.ui.addMessage(gp.monster[gp.currentMap][i].name + " öldürdün!");
 					gp.ui.addMessage("Exp + " + gp.monster[gp.currentMap][i].exp);
 					exp += gp.monster[gp.currentMap][i].exp;
 					checkLevelUp();
@@ -474,8 +474,8 @@ public class Player extends Entity
 			
 			gp.playSE(10);
 			gp.gameState = gp.dialogueState;
-			gp.ui.currentDialogue = "You are level " + level + " now\n"
-					+ "You feel stronger!";
+			gp.ui.currentDialogue = "Şuan " + level + " levelsin\n"
+					+ "Artık daha güçlüsün!";
 		}
 	}
 	public void selectItem() {

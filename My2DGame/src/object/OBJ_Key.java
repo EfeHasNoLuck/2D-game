@@ -26,12 +26,12 @@ public class OBJ_Key extends Entity{
 		
 		if(objIndex != 999) {
 			gp.ui.currentDialogue = name + "kullanarak kapıyı açtın";
-			gp.playSE(3);
+			gp.playSE(21);
 			gp.obj[gp.currentMap][objIndex] = null;
 			return true;
 		}
 		else {
-			gp.ui.currentDialogue = "Ne yapıyorsun?";
+			gp.ui.currentDialogue = "Ne yapıyorsun? Etrafta Kapı yok.";
 			return false;
 		}
 	}

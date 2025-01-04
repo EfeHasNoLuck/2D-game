@@ -127,7 +127,7 @@ public class EventHandler {
 		canTouchEvent = false;
 		gp.stopMusic();
 		gp.playMusic(sound, 0.7F);
-		gp.playSE(3); // teleport sound
+		gp.playSE(20); // teleport sound
 	}
 	
 	public void speak(Entity entity) {
