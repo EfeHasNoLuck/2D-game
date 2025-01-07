@@ -84,7 +84,10 @@ public class KeyHandler implements KeyListener {
 				gp.playMusic(6,0.8F);
 			}
 			if(gp.ui.commandNum == 1) {
-				// add later
+				gp.saveLoad.load();
+				gp.gameState = gp.playState;
+				gp.stopMusic();
+				gp.playMusic(6,0.8F);
 			}
 			if(gp.ui.commandNum == 2) {
 				System.exit(0);
@@ -225,7 +228,7 @@ public class KeyHandler implements KeyListener {
 		if(code == KeyEvent.VK_ENTER) {
 			if(gp.ui.commandNum == 0) {
 				gp.gameState = gp.playState;
-				gp.retry();
+				gp.resetGame(false);
 				gp.stopMusic();
 				if(gp.currentMap == 0) {
 					gp.playMusic(6, 0.8F);
@@ -237,7 +240,7 @@ public class KeyHandler implements KeyListener {
 			}
 			else if(gp.ui.commandNum == 1) {
 				gp.gameState = gp.titleState;
-				gp.restart();
+				gp.resetGame(true);
 			}
 		}
 	}

@@ -12,6 +12,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import ai.PathFinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -55,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable
 	public UI ui = new UI(this);
 	public EventHandler eHandler = new EventHandler(this);
 	public PathFinder pFinder = new PathFinder(this);
+	SaveLoad saveLoad = new SaveLoad(this);
 	Thread gameThread;
 	
 	//Entity & Object
@@ -97,22 +99,22 @@ public class GamePanel extends JPanel implements Runnable
 		playMusic(5,0.8F);
 		gameState = titleState;
 	}
-	public void retry() {
+	
+	public void resetGame(boolean restart) {
 		
 		player.setDefaultPositions();
-		player.restoreLifeAndMana();
+		player.restoreStatus();
+		player.resetCounter();
 		aSetter.setNPC();
 		aSetter.setMonster();
-	}
-	public void restart() {
 		
-		player.setDefaultValues();
-		player.setItems();
-		aSetter.setObject();
-		aSetter.setNPC();
-		aSetter.setMonster();
-		aSetter.setInteractiveTile();
+		if(restart) {
+			player.setDefaultValues();
+			aSetter.setObject();
+			aSetter.setInteractiveTile();
+		}
 	}
+
 	public void startGameThread()
 	{
 		gameThread = new Thread(this);
