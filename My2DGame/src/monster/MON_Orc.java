@@ -27,6 +27,7 @@ public class MON_Orc extends Entity{
 		attack = 6;
 		defense = 2;
 		exp = 10; 
+		knockBackPower = 5;
 		
 		solidArea.x = 4;
 		solidArea.y = 4;
@@ -90,8 +91,6 @@ public class MON_Orc extends Entity{
 		}
 		System.out.println(attacking);
 	}
-	
-
 	
 	public void damageReaction() {
 	

@@ -56,6 +56,7 @@ public class EventHandler {
 		if(canTouchEvent == true) {
 			if(hit(0, 23, 18, "left") == true) {healingPool(gp.dialogueState);}
 			else if(hit(0, 23, 15, "any") == true) {teleport(1, 51, 18, 18);}
+//			else if(hit(0, 23, 13, "any") == true) {teleport(2, 15, 15, 18);}
 			else if(hit(1, 51, 18, "any") == true) {teleport(0, 23, 15, 6);}
 			else if(hit(1, 14, 13, "any") == true) {damagePit(gp.dialogueState);}
 			else if(hit(1, 42, 19, "up") == true) {speak(gp.npc[1][0]);}
