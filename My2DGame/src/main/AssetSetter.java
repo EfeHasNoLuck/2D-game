@@ -4,6 +4,7 @@ import entity.NPC_;
 import entity.NPC_Eray;
 import entity.NPC_Feyza;
 import entity.NPC_Merchant;
+import monster.MON_Orc;
 import monster.MON_RedSlime;
 import object.OBJ_Axe;
 import object.OBJ_Chest;
@@ -65,6 +66,10 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = 3 * gp.tileSize;
 		gp.obj[mapNum][i].worldY = 3 * gp.tileSize;
 		i++;
+		gp.obj[mapNum][i] = new OBJ_Potion_Red(gp);
+		gp.obj[mapNum][i].worldX = 4 * gp.tileSize;
+		gp.obj[mapNum][i].worldY = 4 * gp.tileSize;
+		i++;
 		gp.obj[mapNum][i] = new OBJ_Heart(gp);
 		gp.obj[mapNum][i].worldX = 15 * gp.tileSize;
 		gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
@@ -77,7 +82,10 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = 27 * gp.tileSize;
 		gp.obj[mapNum][i].worldY = 27 * gp.tileSize;
 		i++;
-		
+		gp.obj[mapNum][i] = new OBJ_ManaCrystal(gp);
+		gp.obj[mapNum][i].worldX = 13 * gp.tileSize;
+		gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
+		i++;
 	}
 	
 	
@@ -129,6 +137,10 @@ public class AssetSetter {
 		gp.monster[mapNum][i] = new MON_RedSlime(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*11;
 		gp.monster[mapNum][i].worldY = gp.tileSize*10;
+		i++;
+		gp.monster[mapNum][i] = new MON_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*6;
+		gp.monster[mapNum][i].worldY = gp.tileSize*6;
 		i++;
 	}
 	

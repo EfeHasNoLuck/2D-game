@@ -100,6 +100,8 @@ public class Player extends Entity
 	}
 	public int getAttack() {
 		attackArea = currentWeapon.attackArea;
+		motion1_duration = currentWeapon.motion1_duration;
+		motion2_duration = currentWeapon.motion2_duration;
 		return attack = strength * currentWeapon.attackValue;
 	}
 	public int getDefense() {
@@ -282,57 +284,7 @@ public class Player extends Entity
 		
 		
 	}
-	public void attacking() {
-		
-		spriteCounter++;
-		
-		if(spriteCounter <=5) {
-			spriteNum = 1;
-		}
-		if(spriteCounter > 5 && spriteCounter <= 25) {
-			spriteNum = 2;
-			
-			// save the current worldX, worldY, solidArea
-			int currentWorldX = worldX;
-			int currentWorldY = worldY;
-			int solidAreaWidth = solidArea.width;
-			int solidAreaHeight = solidArea.height;
-			
-			//Adjust player's worldX/Y for the attackArea
-			switch(direction) {
-			case "up":  worldY -= attackArea.height;  break;
-			case "down":  worldY += attackArea.height;  break;
-			case "left":  worldX -= attackArea.width; break;
-			case "right": worldX += attackArea.width; break;
-			}
-			
-			//attackArea becomes solidArera
-			solidArea.width = attackArea.width;
-			solidArea.height = attackArea.height;
-			
-			//check monster collision with updated position and area
-			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-			damageMonster(monsterIndex, attack, currentWeapon.knockBackPower, direction);
-			
-			int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
-			damageInteractiveTile(iTileIndex);
-			
-			int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
-			damageProjectile(projectileIndex);
-			
-			//after collision, back to original data
-			worldX = currentWorldX;
-			worldY = currentWorldY;
-			solidArea.width = solidAreaWidth;
-			solidArea.height = solidAreaHeight;
-			
-		}
-		if(spriteCounter > 25) {
-			spriteNum = 1;
-			spriteCounter = 0;
-			attacking = false;
-		}
-	}
+
 	public void pickUpObject(int i)
 	{
 		if(i != 999)  {
@@ -353,9 +305,7 @@ public class Player extends Entity
 			else {
 				String text;
 				
-				if(inventory.size() != maxInventorySize) {
-					
-					inventory.add(gp.obj[gp.currentMap][i]);
+				if(canObtainItem(gp.obj[gp.currentMap][i]) == true) {
 					gp.playSE(17);
 					text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
 				}
@@ -396,7 +346,7 @@ public class Player extends Entity
 			
 		}
 	}
-	public void damageMonster(int i, int attack, int knockBackPower, String direction) {
+	public void damageMonster(int i, Entity attacker, int attack, int knockBackPower) {
 		
 		if(i != 999) {
 			if(gp.monster[gp.currentMap][i].invincible == false) {
@@ -404,7 +354,7 @@ public class Player extends Entity
 				gp.playSE(9);
 				
 				if(knockBackPower > 0) {
-					knockBack(gp.monster[gp.currentMap][i], knockBackPower, direction);
+					setKnockBack(gp.monster[gp.currentMap][i],attacker, knockBackPower);
 				}
 
 				int damage = attack - gp.monster[gp.currentMap][i].defense;
@@ -427,12 +377,6 @@ public class Player extends Entity
 				}
 			}
 		}
-	}
-	public void knockBack(Entity entity, int knockBackPower, String direction) {
-		
-		entity.direction = direction;
-		entity.speed += knockBackPower;
-		entity.knockBack = true;
 	}
 	public void damageInteractiveTile(int i) {
 		if(i != 999 && gp.iTile[gp.currentMap][i].destructible == true 
@@ -498,10 +442,55 @@ public class Player extends Entity
 			if(selectedItem.type == type_consumable) {
 				
 				if(selectedItem.use(this) == true) {
-					inventory.remove(itemIndex);
+					if(selectedItem.amount > 1) {
+						selectedItem.amount--;
+					}
+					else {
+						inventory.remove(itemIndex);
+					}
 				}
 			}
 		}
+	}
+	public int searchItemInInventory(String itemName) {
+		
+		int itemIndex = 999;
+		
+		for(int i = 0; i < inventory.size(); i++) {
+			if(inventory.get(i).name.equals(itemName)) {
+				itemIndex = i;
+				break;
+			}
+		}
+		return itemIndex;
+	}
+	public boolean canObtainItem(Entity item) {
+		
+		boolean canObtain = false;
+		
+		//check if stackable
+		if(item.stackable == true) {
+			
+			int index = searchItemInInventory(item.name);
+			
+			if(index != 999) {
+				inventory.get(index).amount++;
+				canObtain = true;
+			}
+			else { // new item so we need to check vacancy
+				if(inventory.size() != maxInventorySize) {
+					inventory.add(item);
+					canObtain = true;
+				}
+			}
+		}
+		else { // not stackable so check vacancy 	
+			if(inventory.size() != maxInventorySize) {
+				inventory.add(item);
+				canObtain = true;
+			}
+		}
+		return canObtain;	
 	}
 	public void draw(Graphics2D g2)	{
 		
@@ -558,7 +547,6 @@ public class Player extends Entity
 				if(spriteNum == 2)  {image = attackRight2;}
 			}
 			break;
-			
 		}
 		
 		if(invincible == true) {
