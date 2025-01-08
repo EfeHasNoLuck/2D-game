@@ -6,13 +6,14 @@ import main.GamePanel;
 public class OBJ_Coin_tl extends Entity{
 
 	GamePanel gp;
+	public static final String objName = "Türk Lirasi";
 	
 	public OBJ_Coin_tl(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
 		
 		type = type_pickupOnly;
-		name = "Turk Lirasi";
+		name = objName;
 		value = 1;
 		down1 = setup("/objects/Coin_tl");
 	}

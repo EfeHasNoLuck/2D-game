@@ -8,12 +8,13 @@ import main.GamePanel;
 public class OBJ_Plasma extends Projectile{
 	
 	GamePanel gp;
+	public static final String objName = "Plasma";
 	
 	public OBJ_Plasma(GamePanel gp) {
 		super(gp);
 		this.gp = gp;
 		
-		name = "Plasma";
+		name = objName;
 		speed = 7;
 		maxLife = 80;
 		life = maxLife;

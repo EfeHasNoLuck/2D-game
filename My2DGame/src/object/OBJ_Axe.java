@@ -5,11 +5,13 @@ import main.GamePanel;
 
 public class OBJ_Axe extends Entity{
 
+	public static final String objName = "Oduncu Baltası";
+	
 	public OBJ_Axe(GamePanel gp) {
 		super(gp);
 
 		type = type_axe;
-		name = "Oduncu Baltası";
+		name = objName;
 		down1 = setup("/objects/axe");
 		attackValue = 0;
 		attackArea.width = 30;

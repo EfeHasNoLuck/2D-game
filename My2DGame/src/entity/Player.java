@@ -71,6 +71,7 @@ public class Player extends Entity
 		getAttackImage();
 		getGuardImage();
 		setItems();
+		setDialogue();
 	}	
 	public void setDefaultPositions() {
 		
@@ -85,6 +86,10 @@ public class Player extends Entity
 			direction = "left";
 		}
 
+	}
+	public void setDialogue() {
+		
+		dialogues[0][0] =  "Şuan " + level + " levelsin\n" + "Artık daha güçlüsün!";
 	}
 	public void restoreStatus() {
 		
@@ -493,8 +498,9 @@ public class Player extends Entity
 			
 			gp.playSE(10);
 			gp.gameState = gp.dialogueState;
-			dialogues[0][0] = "Şuan " + level + " levelsin\n"
-					+ "Artık daha güçlüsün!";
+//			dialogues[0][0] = "Şuan " + level + " levelsin\n" + "Artık daha güçlüsün!";
+			
+			setDialogue();
 			startDialogue(this, 0);
 		}
 	}
@@ -544,8 +550,10 @@ public class Player extends Entity
 		
 		boolean canObtain = false;
 		
+		Entity newItem = gp.eGenerator.getObject(item.name);
+		
 		//check if stackable
-		if(item.stackable == true) {
+		if(newItem.stackable == true) {
 			
 			int index = searchItemInInventory(item.name);
 			
@@ -555,14 +563,14 @@ public class Player extends Entity
 			}
 			else { // new item so we need to check vacancy
 				if(inventory.size() != maxInventorySize) {
-					inventory.add(item);
+					inventory.add(newItem);
 					canObtain = true;
 				}
 			}
 		}
 		else { // not stackable so check vacancy 	
 			if(inventory.size() != maxInventorySize) {
-				inventory.add(item);
+				inventory.add(newItem);
 				canObtain = true;
 			}
 		}

@@ -57,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable
 	public EventHandler eHandler = new EventHandler(this);
 	public PathFinder pFinder = new PathFinder(this);
 	SaveLoad saveLoad = new SaveLoad(this);
+	public EntityGenerator eGenerator = new EntityGenerator(this);
 	Thread gameThread;
 	
 	//Entity & Object
