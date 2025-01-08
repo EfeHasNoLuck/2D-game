@@ -173,10 +173,10 @@ public class Player extends Entity
 	}
 	public void getGuardImage() {
 		
-		guardUp = setup("/player/boy_axe_up_1");
-		guardDown = setup("/player/boy_axe_up_1");
-		guardLeft = setup("/player/boy_axe_up_1");
-		guardRight = setup("/player/boy_axe_up_1");
+		guardUp = setup("/player/boy_shield_up");
+		guardDown = setup("/player/boy_shield_down");
+		guardLeft = setup("/player/boy_shield_left");
+		guardRight = setup("/player/boy_shield_right");
 	}
 	public void update()  {
 			
