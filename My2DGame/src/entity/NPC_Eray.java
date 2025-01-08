@@ -30,10 +30,10 @@ public class NPC_Eray extends Entity {
 	
 	public void setDialogue() {
 		
-		dialogues[0] = "Eray: Selam naber";
-		dialogues[1] = "Biz: Iyi valla nolsun";
-		dialogues[2] = "Eray: tamam gorusurz";
-		dialogues[3] = "Biz: gorusurz";
+		//dialogues[0] = "Eray: Selam naber";
+		//dialogues[1] = "Biz: Iyi valla nolsun";
+		//dialogues[2] = "Eray: tamam gorusurz";
+		//dialogues[3] = "Biz: gorusurz";
 		
 	}
 

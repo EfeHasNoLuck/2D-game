@@ -391,11 +391,10 @@ public class Player extends Entity
 	}
 	public void interactNPC(int i) { 
 		
-		if(gp.keyH.enterPressed == true) {
-			
-			if(i != 999) {
+		if(i != 999) {
+
+				if(gp.keyH.enterPressed == true) {
 				attackCanceled = true;
-				gp.gameState = gp.dialogueState;
 				gp.npc[gp.currentMap][i].speak();
 			}
 		}
@@ -494,8 +493,9 @@ public class Player extends Entity
 			
 			gp.playSE(10);
 			gp.gameState = gp.dialogueState;
-			gp.ui.currentDialogue = "Şuan " + level + " levelsin\n"
+			dialogues[0][0] = "Şuan " + level + " levelsin\n"
 					+ "Artık daha güçlüsün!";
+			startDialogue(this, 0);
 		}
 	}
 	public void selectItem() {

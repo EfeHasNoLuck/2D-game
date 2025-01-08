@@ -17,22 +17,28 @@ public class OBJ_Key extends Entity{
 		description = "[" + name + "]\nIt opens a door.";
 		price = 100;
 		stackable = true;
+		
+		setDialogue();
+	}
+	public void setDialogue() {
+
+		dialogues[0][0] = name + "kullandın ve kapıyı açtın";
+		dialogues[1][0] = "Ne yapıyorsun? Etrafta Kapi \nolmadan anahtarı kullanamazsın";
 	}
 	
 	public boolean use(Entity entity) {
 		
-		gp.gameState = gp.dialogueState;
 		
 		int objIndex = getDetected(entity, gp.obj, "Door");
 		
 		if(objIndex != 999) {
-			gp.ui.currentDialogue = name + "kullanarak kapıyı açtın";
+			startDialogue(this, 0);
 			gp.playSE(21);
 			gp.obj[gp.currentMap][objIndex] = null;
 			return true;
 		}
 		else {
-			gp.ui.currentDialogue = "Ne yapıyorsun? Etrafta Kapı yok.";
+			startDialogue(this, 1);
 			return false;
 		}
 	}

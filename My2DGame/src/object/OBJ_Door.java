@@ -22,11 +22,15 @@ public class OBJ_Door extends Entity{
 		solidArea.height = 32;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-	}
 	
+		setDialogue();
+	}
+	public void setDialogue() {
+		
+		dialogues[0][0] = "Kapıyı açman için anahtar gerekli!";
+	}
 	public void interact() {
 		
-		gp.gameState = gp.dialogueState;
-		gp.ui.currentDialogue = "Kapıyı açmak için anahtar gerekli!";
+		startDialogue(this, 0);
 	}
 }

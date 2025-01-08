@@ -6,6 +6,7 @@ public class EventHandler {
 	
 	GamePanel gp;
 	EventRect eventRect[][][];	
+	Entity eventMaster;
 	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
@@ -13,6 +14,8 @@ public class EventHandler {
 	
 	public EventHandler(GamePanel gp) {
 		this.gp = gp;
+		
+		eventMaster = new Entity(gp);
 		
 		eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 		
@@ -41,8 +44,15 @@ public class EventHandler {
 				}
 			}
 		}
+		
+		setDialogue();
 	}
-	
+	public void setDialogue() {
+		
+		eventMaster.dialogues[0][0] = "Çukura düştün! -1 can";
+		
+		eventMaster.dialogues[1][0] = "Şifalı su içtin.\nManan ve Canın yenilendi.\n" + "(Şu anki gelişmen kaydedildi)";
+	}
 	public void checkEvent() {
 		
 		// checking if the player is away more than 1 tile
@@ -94,7 +104,8 @@ public class EventHandler {
 	public void damagePit(int gameState) {
 		
 		gp.gameState = gameState;
-		gp.ui.currentDialogue = "Çukura düştün! -1 can";
+		gp.playSE(20); // cukura dusme sesi ekle
+		eventMaster.startDialogue(eventMaster, 0);
 		gp.player.life -= 1;
 ///		eventRect[col][row].eventDone = true;
 		canTouchEvent = false;
@@ -105,7 +116,8 @@ public class EventHandler {
 		if(gp.keyH.enterPressed == true) {
 			gp.gameState = gameState;
 			gp.player.attackCanceled = true;
-			gp.ui.currentDialogue = "You drink the water.\nYour life and mana has been recovered.\n" + "(The progress has been saved)";
+			gp.playSE(20); // sifa sesi su icme save tarzi bi ses
+			eventMaster.startDialogue(eventMaster, 1);
 			gp.player.life = gp.player.maxLife;
 			gp.player.mana = gp.player.maxMana;
 			gp.aSetter.setMonster();

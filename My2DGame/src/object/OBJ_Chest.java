@@ -27,29 +27,31 @@ public class OBJ_Chest extends Entity{
 	}
 	public void setLoot(Entity loot) {
 		this.loot = loot;
+		
+		setDialogue();
+	}
+	public void setDialogue() {
+	
+		dialogues[0][0] = "Sandığı açtın ve " + loot.name + " buldun!" + "\n...Ama daha fazla taşıyamazsın!";
+		dialogues[1][0] = "Sandığı açtın ve " + loot.name + " buldun!" + "\n" + loot.name + " Kazandın!";
+		dialogues[2][0] = "Sandık Boş";
 	}
 	public void interact() {
-		
-		gp.gameState = gp.dialogueState;
 		
 		if(opened == false) {
 			gp.playSE(11);
 			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Sandığı açtın ve " + loot.name + " buldun!");
-			
 			if(gp.player.canObtainItem(loot) == false) {
-				sb.append("\n...Ama daha fazla taşıyamazsın!");
+				startDialogue(this, 0);
 			}
 			else {
-				sb.append("\n" + loot.name + " Kazandın!");
+				startDialogue(this, 2);
 				down1 = image2;
 				opened = true;
 			}
-			gp.ui.currentDialogue = sb.toString();
 		}
 		else {
-			gp.ui.currentDialogue = "Sandık Boş";
+			startDialogue(this, 3);
 		}
 	}
 }

@@ -42,7 +42,11 @@ public class NPC_Merchant extends Entity{
 	}
 	public void setDialogue() {
 		
-		dialogues[0] = "Demek beni buldun.\nİşe yarar bir kaç eşyam var\nTakas yapmak ister misin?";		
+		dialogues[0][0] = "Demek beni buldun.\nİşe yarar bir kaç eşyam var\nTakas yapmak ister misin?";
+		dialogues[0][1] = "Tekrar Beklerim!";
+		dialogues[0][2] = "Bunu almak için yeterli paran yok!";
+		dialogues[0][3] = "Daha fazla eşya taşıyamazsın";
+		dialogues[0][4] = "Kullandığın eşyayı satamazsın!";
 	}
 	
 	public void setItems() {
@@ -56,7 +60,7 @@ public class NPC_Merchant extends Entity{
 
 	public void speak() {
 		
-		super.speak();
+		facePlayer();
 		gp.gameState = gp.tradeState;
 		gp.ui.npc = this;
 	}

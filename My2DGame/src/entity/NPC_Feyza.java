@@ -30,10 +30,10 @@ public class NPC_Feyza extends Entity {
 	
 	public void setDialogue() {
 		
-		dialogues[0] = "Girl: hos geldin";
-		dialogues[1] = "Biz: merhaba hos buldum";
-		dialogues[2] = "Girl: gorusurz";
-		dialogues[3] = "Biz: gorusurz";
+		//dialogues[0] = "Girl: hos geldin";
+		//dialogues[1] = "Biz: merhaba hos buldum";
+		//dialogues[2] = "Girl: gorusurz";
+		//dialogues[3] = "Biz: gorusurz";
 		
 	}
 

@@ -83,13 +83,10 @@ public class MON_Orc extends Entity{
 			//get random direction
 			getRandomDirection();
 		}
-		
-		System.out.println(attacking);
 		// check if it attacks
 		if(attacking == false) {
 			checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
 		}
-		System.out.println(attacking);
 	}
 	
 	public void damageReaction() {

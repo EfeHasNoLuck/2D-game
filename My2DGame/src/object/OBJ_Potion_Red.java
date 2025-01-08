@@ -13,20 +13,23 @@ public class OBJ_Potion_Red  extends Entity{
 		this.gp = gp;
 		
 		type = type_consumable;
-		name = "Red Potion";
-		value = 5;
+		name = "Can iksiri";
+		value = 4;
 		down1 = setup("/objects/potion_red");
 		description = "[Red Potion]\nHeals your life by " + value + ".";
 		price = 25;
 		stackable = true;
+		
+		setDialogue();
 	}
-	
+	public void setDialogue() {
+		
+		dialogues[0][0] =  name + "içtin!\n" +
+				"canın " + value + "miktarında yenilendi";
+	}
 	public boolean use(Entity entity) {
 		
-		gp.gameState = gp.dialogueState;
-		gp.ui.currentDialogue = "you drink the " + name + "!\n" 
-				+ "Your life has been recovered by " + value + ".";
-		
+		startDialogue(this, 0);
 		entity.life += value;
 		gp.playSE(19);
 		return true;
