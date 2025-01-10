@@ -28,7 +28,7 @@ public class TileManager {
 		this.gp = gp;
 		
 		// Read tile data file
-		InputStream is = getClass().getResourceAsStream("/maps/A_blok_tile_data.txt"); // /maps/tile_updated.txt
+		InputStream is = getClass().getResourceAsStream("/maps/tile.txt"); // /maps/tile_updated.txt "/maps/A_blok_tile_data.txt"
 		BufferedReader br = new BufferedReader(new InputStreamReader(is)); 
 		
 		//get tile name and collision
@@ -48,7 +48,7 @@ public class TileManager {
 		tile = new Tile[fileNames.size()];
 		getTileImage();
 		
-		is = getClass().getResourceAsStream("/maps/sample.txt");
+		is = getClass().getResourceAsStream("/maps/map.txt"); // "/maps/sample.txt"
 		br = new BufferedReader(new InputStreamReader(is));
 		
 		try {
@@ -65,12 +65,11 @@ public class TileManager {
 			e.printStackTrace();
 		}
 		
+		loadMap("/maps/map-tree.txt", 0);
+		loadMap("/maps/class_map.txt", 1);
+		loadMap("/maps/dungeon_map.txt", 2);
+		loadMap("/maps/boss_map.txt", 3);
 		
-		//mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
-		
-		//getTileImage();
-		loadMap("/maps/sample.txt", 0);
-		loadMap("/maps/dungeon_map_updated.txt", 1);
 //		loadMap("/maps/A_blok_map.txt", 2);
 	}
 	
@@ -105,7 +104,7 @@ public class TileManager {
 	
 		try {
 			tile[index] = new Tile();
-			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles2/" + imageName));  //("/tiles/" + imageName + ".png"));
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageName));  //("/tiles/" + imageName + ".png"));
 			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
 			tile[index].collision = collision;
 		}

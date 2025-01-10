@@ -33,9 +33,11 @@ public class AssetSetter {
 	}
 	
 	public void setObject() {
-		
+
+
 		int mapNum = 0;
 		int i = 0;
+/*
 		gp.obj[mapNum][i] = new OBJ_Coin_tl(gp);
 		gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
 		gp.obj[mapNum][i].worldY = 7 * gp.tileSize;
@@ -97,9 +99,12 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldX = 13 * gp.tileSize;
 		gp.obj[mapNum][i].worldY = 13 * gp.tileSize;
 		i++;
+*/
 		
 		mapNum++;
 		i = 0;
+
+/*
 		gp.obj[mapNum][i] = new OBJ_Chest(gp);
 		gp.obj[mapNum][i].setLoot(new OBJ_Pickaxe(gp));
 		gp.obj[mapNum][i].worldX = 35 * gp.tileSize;
@@ -117,11 +122,14 @@ public class AssetSetter {
 		gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
 		gp.obj[mapNum][i].worldX = 31 * gp.tileSize;
 		gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
+		
+*/
 	}
 	
 	
 	public void setNPC() {
-		
+
+/*
 		int mapNum = 0;
 		int i = 0;
 		gp.npc[mapNum][i] = new NPC_(gp);
@@ -153,11 +161,13 @@ public class AssetSetter {
 		gp.npc[mapNum][i] = new NPC_BigRock(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*32;
 		gp.npc[mapNum][i].worldY = gp.tileSize*12;
+	*/
 	}
-	
+
 	
 	public void setMonster() {
 		
+/*
 		int mapNum = 0;
 		int i = 0;
 		gp.monster[mapNum][i] = new MON_RedSlime(gp);
@@ -188,10 +198,12 @@ public class AssetSetter {
 		gp.monster[mapNum][i].worldX = gp.tileSize*35;
 		gp.monster[mapNum][i].worldY = gp.tileSize*35;
 		i++;
+*/
 	}
 	
 	public void setInteractiveTile() {
-		
+
+/*
 		int mapNum = 0;
 		int i = 0;
 		gp.iTile[mapNum][i] = new IT_DryTree(gp,28,28);i++;
@@ -211,5 +223,7 @@ public class AssetSetter {
 		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,35,11);i++;
 		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,33,11);i++;
 		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,32,11);i++;
+		
+*/
 	}
 }
