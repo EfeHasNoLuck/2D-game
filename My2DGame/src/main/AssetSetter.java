@@ -1,26 +1,17 @@
 package main;
 
 import entity.NPC_;
+import entity.NPC_Ali;
 import entity.NPC_BigRock;
 import entity.NPC_Eray;
 import entity.NPC_Feyza;
-import entity.NPC_Merchant;
+import entity.NPC_Makineci;
 import monster.MON_Orc;
 import monster.MON_RedSlime;
-import monster.MON_SkeletonLord;
-import object.OBJ_Axe;
 import object.OBJ_Chest;
-import object.OBJ_Coin_tl;
-import object.OBJ_Door;
 import object.OBJ_Door_Iron;
-import object.OBJ_Energy;
-import object.OBJ_Heart;
-import object.OBJ_Key;
-import object.OBJ_ManaCrystal;
 import object.OBJ_Pickaxe;
-import object.OBJ_Potion_Red;
 import tile_interactive.IT_DestructibleWall;
-import tile_interactive.IT_DryTree;
 import tile_interactive.IT_MetalPlate;
 
 public class AssetSetter {
@@ -145,25 +136,32 @@ public class AssetSetter {
 		int mapNum = 0;
 		int i = 0;
 		
-/*
+
 		gp.npc[mapNum][i] = new NPC_(gp);
-		gp.npc[mapNum][i].worldX = gp.tileSize*21;
-		gp.npc[mapNum][i].worldY = gp.tileSize*21;
+		gp.npc[mapNum][i].worldX = gp.tileSize*68;
+		gp.npc[mapNum][i].worldY = gp.tileSize*37;
 		i++;
 		gp.npc[mapNum][i] = new NPC_Feyza(gp);
-		gp.npc[mapNum][i].worldX = gp.tileSize*25;
+		gp.npc[mapNum][i].worldX = gp.tileSize*39;
 		gp.npc[mapNum][i].worldY = gp.tileSize*25;
 		i++;
 		gp.npc[mapNum][i] = new NPC_Eray(gp);
-		gp.npc[mapNum][i].worldX = gp.tileSize*26;
-		gp.npc[mapNum][i].worldY = gp.tileSize*26;
+		gp.npc[mapNum][i].worldX = gp.tileSize*55;
+		gp.npc[mapNum][i].worldY = gp.tileSize*60;
+		i++;
+		gp.npc[mapNum][i] = new NPC_Ali(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*45;
+		gp.npc[mapNum][i].worldY = gp.tileSize*53;
 		
+
 		mapNum = 1;
 		i = 0;
-		gp.npc[mapNum][i] = new NPC_Merchant(gp);
-		gp.npc[mapNum][i].worldX = gp.tileSize*42;
-		gp.npc[mapNum][i].worldY = gp.tileSize*17;
+		gp.npc[mapNum][i] = new NPC_Makineci(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*68;
+		gp.npc[mapNum][i].worldY = gp.tileSize*48;
 		i++;
+		
+/*
 		gp.npc[mapNum][i] = new NPC_BigRock(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*35;
 		gp.npc[mapNum][i].worldY = gp.tileSize*12;
