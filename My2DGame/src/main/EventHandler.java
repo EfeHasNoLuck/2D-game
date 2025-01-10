@@ -28,8 +28,8 @@ public class EventHandler {
 			eventRect[map][col][row] = new EventRect();
 			eventRect[map][col][row].x = 23;
 			eventRect[map][col][row].y = 23;
-			eventRect[map][col][row].width = 17;
-			eventRect[map][col][row].height = 7;
+			eventRect[map][col][row].width = 5;
+			eventRect[map][col][row].height = 5;
 			eventRect[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
 			eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
 			
@@ -65,10 +65,12 @@ public class EventHandler {
 
 		if(canTouchEvent == true) {
 				
-			if(hit(0, 67, 51, "any") == true) {teleport(1, 62, 54, 18);}
-			else if(hit(0, 68, 51, "any") == true) {teleport(1, 63, 54, 18);}
-			else if(hit(1, 62, 54, "any") == true) {teleport(0, 67, 51, 18);}
-			else if(hit(1, 63, 54, "any") == true) {teleport(0, 68, 51, 18);}
+			if(hit(0, 68, 51, "any") == true) {teleport(1, 62, 55, 18);}
+			else if(hit(1, 62, 55, "any") == true) {teleport(0, 68, 51, 6);}
+			else if(hit(0, 75, 34, "any") == true) {teleport(1, 71, 41, 18);}
+			else if(hit(1, 71, 41, "any") == true) {teleport(0, 75, 34, 6);}
+			else if(hit(0, 36, 23, "any") == true) {teleport(2, 79, 43, 18);}
+			else if(hit(2, 79, 43, "any") == true) {teleport(0, 36, 23, 6);}
 			
 			//if(hit(0, 23, 18, "left") == true) {healingPool(gp.dialogueState);}
 			//else if(hit(0, 23, 15, "any") == true) {teleport(1, 51, 18, 18);}

@@ -85,6 +85,11 @@ public class Player extends Entity
 			worldY = gp.tileSize * 19;
 			direction = "left";
 		}
+		if(gp.currentMap == 2) {
+			worldX = gp.tileSize * 79;
+			worldY = gp.tileSize * 44;
+			direction = "left";
+		}
 
 	}
 	public void setDialogue() {

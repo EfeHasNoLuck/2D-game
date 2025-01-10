@@ -101,8 +101,18 @@ public class AssetSetter {
 		i++;
 */
 		
-		mapNum++;
+		mapNum = 2;
 		i = 0;
+		
+		gp.obj[mapNum][i] = new OBJ_Chest(gp);
+		gp.obj[mapNum][i].setLoot(new OBJ_Pickaxe(gp));
+		gp.obj[mapNum][i].worldX = 70 * gp.tileSize;
+		gp.obj[mapNum][i].worldY = 42 * gp.tileSize;
+		i++;
+		gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
+		gp.obj[mapNum][i].worldX = 44 * gp.tileSize;
+		gp.obj[mapNum][i].worldY = 47 * gp.tileSize;
+		i++;
 
 /*
 		gp.obj[mapNum][i] = new OBJ_Chest(gp);
@@ -124,14 +134,18 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
 		
 */
+		mapNum = 1;
+		i = 0;
 	}
 	
 	
 	public void setNPC() {
 
-/*
+
 		int mapNum = 0;
 		int i = 0;
+		
+/*
 		gp.npc[mapNum][i] = new NPC_(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*21;
 		gp.npc[mapNum][i].worldY = gp.tileSize*21;
@@ -162,14 +176,30 @@ public class AssetSetter {
 		gp.npc[mapNum][i].worldX = gp.tileSize*32;
 		gp.npc[mapNum][i].worldY = gp.tileSize*12;
 	*/
+		mapNum = 2;
+		i = 0;
+		
+		gp.npc[mapNum][i] = new NPC_BigRock(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*61;
+		gp.npc[mapNum][i].worldY = gp.tileSize*38;
+		i++;
+		gp.npc[mapNum][i] = new NPC_BigRock(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*50;
+		gp.npc[mapNum][i].worldY = gp.tileSize*54;
+		i++;
+		gp.npc[mapNum][i] = new NPC_BigRock(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*37;
+		gp.npc[mapNum][i].worldY = gp.tileSize*50;
+		i++;
 	}
 
 	
 	public void setMonster() {
 		
-/*
 		int mapNum = 0;
 		int i = 0;
+		
+		/*
 		gp.monster[mapNum][i] = new MON_RedSlime(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*10;
 		gp.monster[mapNum][i].worldY = gp.tileSize*8;
@@ -199,31 +229,75 @@ public class AssetSetter {
 		gp.monster[mapNum][i].worldY = gp.tileSize*35;
 		i++;
 */
+		i = 0;
+		mapNum = 2;
+		
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*61;
+		gp.monster[mapNum][i].worldY = gp.tileSize*36;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*56;
+		gp.monster[mapNum][i].worldY = gp.tileSize*36;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*59;
+		gp.monster[mapNum][i].worldY = gp.tileSize*39;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*55;
+		gp.monster[mapNum][i].worldY = gp.tileSize*55;
+		i++;
+		gp.monster[mapNum][i] = new MON_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*49;
+		gp.monster[mapNum][i].worldY = gp.tileSize*58;
+		i++;
+		gp.monster[mapNum][i] = new MON_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*42;
+		gp.monster[mapNum][i].worldY = gp.tileSize*49;
+		i++;
+		gp.monster[mapNum][i] = new MON_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*37;
+		gp.monster[mapNum][i].worldY = gp.tileSize*53;
+		i++;
 	}
 	
 	public void setInteractiveTile() {
 
-/*
+
 		int mapNum = 0;
 		int i = 0;
-		gp.iTile[mapNum][i] = new IT_DryTree(gp,28,28);i++;
-		gp.iTile[mapNum][i] = new IT_DryTree(gp,29,28);i++;
-		gp.iTile[mapNum][i] = new IT_DryTree(gp,30,28);i++;
-		gp.iTile[mapNum][i] = new IT_DryTree(gp,31,28);i++;
-		gp.iTile[mapNum][i] = new IT_DryTree(gp,32,28);i++;
+//		gp.iTile[mapNum][i] = new IT_DryTree(gp,28,28);i++;
+//		gp.iTile[mapNum][i] = new IT_DryTree(gp,29,28);i++;
+//		gp.iTile[mapNum][i] = new IT_DryTree(gp,30,28);i++;
+//		gp.iTile[mapNum][i] = new IT_DryTree(gp,31,28);i++;
+//		gp.iTile[mapNum][i] = new IT_DryTree(gp,32,28);i++;
 		
 		mapNum = 1;
 		i = 0;
-		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,22);i++;
-		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,21);i++;
-		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,20);i++;
-		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,19);i++;
-		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,18);i++;
+//		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,22);i++;
+//		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,21);i++;
+//		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,20);i++;
+//		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,19);i++;
+//		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,18);i++;
 		
-		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,35,11);i++;
-		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,33,11);i++;
-		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,32,11);i++;
+//		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,35,11);i++;
+//		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,33,11);i++;
+//		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,32,11);i++;
 		
-*/
+		mapNum = 2;
+		i = 0;
+		
+		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,56,59);i++;
+		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,35,54);i++;
+		gp.iTile[mapNum][i] = new IT_MetalPlate(gp,63,35);i++;
+		
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,54,42);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,54,43);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,52,50);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,52,51);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,42,48);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,43,48);i++;
+
 	}
 }
