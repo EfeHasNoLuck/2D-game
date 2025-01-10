@@ -48,7 +48,7 @@ public class TileManager {
 		tile = new Tile[fileNames.size()];
 		getTileImage();
 		
-		is = getClass().getResourceAsStream("/maps/A_blok_map.txt");
+		is = getClass().getResourceAsStream("/maps/sample.txt");
 		br = new BufferedReader(new InputStreamReader(is));
 		
 		try {
@@ -71,7 +71,7 @@ public class TileManager {
 		//getTileImage();
 		loadMap("/maps/sample.txt", 0);
 		loadMap("/maps/dungeon_map_updated.txt", 1);
-		loadMap("/maps/A_blok_map.txt", 2);
+//		loadMap("/maps/A_blok_map.txt", 2);
 	}
 	
 	public void getTileImage()

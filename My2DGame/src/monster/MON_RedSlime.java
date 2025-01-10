@@ -81,7 +81,7 @@ public class MON_RedSlime extends Entity{
 			checkStartChasingDistance(gp.player, 5, 100);
 			
 			//get random direction
-			getRandomDirection();
+			getRandomDirection(120);
 		}
 	}
 	

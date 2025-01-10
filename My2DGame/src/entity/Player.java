@@ -170,6 +170,16 @@ public class Player extends Entity
 			attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize*2, gp.tileSize);
 			attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize*2, gp.tileSize);
 		}
+		if(currentWeapon.type == type_pickaxe) {
+			attackUp1 = setup("/player/boy_pickaxe_up_1", gp.tileSize, gp.tileSize*2);
+			attackUp2 = setup("/player/boy_pickaxe_up_2", gp.tileSize, gp.tileSize*2);
+			attackDown1 = setup("/player/boy_pickaxe_down_1", gp.tileSize, gp.tileSize*2);
+			attackDown2 = setup("/player/boy_pickaxe_down_2", gp.tileSize, gp.tileSize*2);
+			attackLeft1 = setup("/player/boy_pickaxe_left_1", gp.tileSize*2, gp.tileSize);
+			attackLeft2 = setup("/player/boy_pickaxe_left_2", gp.tileSize*2, gp.tileSize);
+			attackRight1 = setup("/player/boy_pickaxe_right_1", gp.tileSize*2, gp.tileSize);
+			attackRight2 = setup("/player/boy_pickaxe_right_2", gp.tileSize*2, gp.tileSize);
+		}
 	}
 	public void getGuardImage() {
 		
@@ -350,13 +360,17 @@ public class Player extends Entity
 			mana = maxMana;
 		}
 		
-		if(life <= 0) {
-			gp.gameState = gp.gameOverState;
-			gp.ui.commandNum = -1;
-			gp.stopMusic();
-			gp.playMusic(15, 0.7F);
-			gp.playSE(16); 
+		if(keyH.godMode == false) {
+			if(life <= 0) {
+				gp.gameState = gp.gameOverState;
+				gp.ui.commandNum = -1;
+				gp.stopMusic();
+				gp.playMusic(15, 0.7F);
+				gp.playSE(16); 
+			}
 		}
+		
+
 		
 		
 	}
@@ -402,6 +416,8 @@ public class Player extends Entity
 				attackCanceled = true;
 				gp.npc[gp.currentMap][i].speak();
 			}
+				
+			gp.npc[gp.currentMap][i].move(direction);
 		}
 	}
 	public void contactMonster(int i) {
@@ -512,7 +528,7 @@ public class Player extends Entity
 			
 			Entity selectedItem = inventory.get(itemIndex);
 			
-			if(selectedItem.type == type_sword || selectedItem.type == type_axe) {
+			if(selectedItem.type == type_sword || selectedItem.type == type_axe || selectedItem.type == type_pickaxe) {
 				currentWeapon = selectedItem;
 				attack = getAttack();
 				getAttackImage();

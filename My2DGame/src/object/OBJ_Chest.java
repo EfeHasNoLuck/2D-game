@@ -46,13 +46,13 @@ public class OBJ_Chest extends Entity{
 				startDialogue(this, 0);
 			}
 			else {
-				startDialogue(this, 2);
+				startDialogue(this, 1);
 				down1 = image2;
 				opened = true;
 			}
 		}
 		else {
-			startDialogue(this, 3);
+			startDialogue(this, 2);
 		}
 	}
 }
