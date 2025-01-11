@@ -69,8 +69,6 @@ public class TileManager {
 		loadMap("/maps/class_map.txt", 1);
 		loadMap("/maps/dungeon_map.txt", 2);
 		loadMap("/maps/boss_map.txt", 3);
-		
-//		loadMap("/maps/A_blok_map.txt", 2);
 	}
 	
 	public void getTileImage()

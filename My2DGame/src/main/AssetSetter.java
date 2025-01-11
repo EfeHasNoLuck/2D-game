@@ -9,6 +9,7 @@ import entity.NPC_Makineci;
 import monster.MON_Orc;
 import monster.MON_RedSlime;
 import object.OBJ_Chest;
+import object.OBJ_Door;
 import object.OBJ_Door_Iron;
 import object.OBJ_Pickaxe;
 import tile_interactive.IT_DestructibleWall;
@@ -28,6 +29,11 @@ public class AssetSetter {
 
 		int mapNum = 0;
 		int i = 0;
+		
+		gp.obj[mapNum][i] = new OBJ_Door(gp);
+		gp.obj[mapNum][i].worldX = 75 * gp.tileSize;
+		gp.obj[mapNum][i].worldY = 34 * gp.tileSize;
+		i++;
 /*
 		gp.obj[mapNum][i] = new OBJ_Coin_tl(gp);
 		gp.obj[mapNum][i].worldX = 23 * gp.tileSize;
@@ -135,8 +141,6 @@ public class AssetSetter {
 
 		int mapNum = 0;
 		int i = 0;
-		
-
 		gp.npc[mapNum][i] = new NPC_(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*68;
 		gp.npc[mapNum][i].worldY = gp.tileSize*37;
@@ -161,22 +165,8 @@ public class AssetSetter {
 		gp.npc[mapNum][i].worldY = gp.tileSize*48;
 		i++;
 		
-/*
-		gp.npc[mapNum][i] = new NPC_BigRock(gp);
-		gp.npc[mapNum][i].worldX = gp.tileSize*35;
-		gp.npc[mapNum][i].worldY = gp.tileSize*12;
-		i++;
-		gp.npc[mapNum][i] = new NPC_BigRock(gp);
-		gp.npc[mapNum][i].worldX = gp.tileSize*33;
-		gp.npc[mapNum][i].worldY = gp.tileSize*12;
-		i++;
-		gp.npc[mapNum][i] = new NPC_BigRock(gp);
-		gp.npc[mapNum][i].worldX = gp.tileSize*32;
-		gp.npc[mapNum][i].worldY = gp.tileSize*12;
-	*/
 		mapNum = 2;
 		i = 0;
-		
 		gp.npc[mapNum][i] = new NPC_BigRock(gp);
 		gp.npc[mapNum][i].worldX = gp.tileSize*61;
 		gp.npc[mapNum][i].worldY = gp.tileSize*38;
@@ -225,11 +215,30 @@ public class AssetSetter {
 		gp.monster[mapNum][i] = new MON_SkeletonLord(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*35;
 		gp.monster[mapNum][i].worldY = gp.tileSize*35;
-		i++;
+		i++;	
 */
+		
+		i = 0;
+		mapNum = 1;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*57;
+		gp.monster[mapNum][i].worldY = gp.tileSize*46;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*55;
+		gp.monster[mapNum][i].worldY = gp.tileSize*46;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*66;
+		gp.monster[mapNum][i].worldY = gp.tileSize*43;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*71;
+		gp.monster[mapNum][i].worldY = gp.tileSize*50;
+		i++;
+		
 		i = 0;
 		mapNum = 2;
-		
 		gp.monster[mapNum][i] = new MON_RedSlime(gp);
 		gp.monster[mapNum][i].worldX = gp.tileSize*61;
 		gp.monster[mapNum][i].worldY = gp.tileSize*36;

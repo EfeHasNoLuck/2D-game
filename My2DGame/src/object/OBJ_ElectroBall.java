@@ -19,7 +19,7 @@ public class OBJ_ElectroBall extends Projectile{
 		speed = 8;
 		maxLife = 80;
 		life = maxLife;
-		attack = 1;
+		attack = 2;
 		knockBackPower = 5;
 		useCost = 1;
 		alive = false;

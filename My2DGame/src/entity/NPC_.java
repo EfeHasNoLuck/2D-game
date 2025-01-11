@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import main.GamePanel;
+import object.OBJ_Key;
 
 public class NPC_ extends Entity{
 
@@ -40,16 +41,11 @@ public class NPC_ extends Entity{
 	
 	public void setDialogue() {
 		
-		dialogues[0][0] = "Hello lady, how is your day going\n I hope you are well asf";
-		dialogues[0][1] = "Wassup";
-		dialogues[0][2] = "How are you";
-		dialogues[0][3] = "GoodBye";
+		dialogues[0][0] = "Kız: Ah, sonunda geldin!";
+		dialogues[0][1] = "Kız: Çantana Anahtar koydum bu anahtarla\n alt kattaki b701 kapısını açabilirsin";
+		dialogues[0][2] = "Kız: Aaa bu arada!";
 		
-		dialogues[1][0] = "1 0 sen nasilsin dostum\n hayat nasil gidiyor\n umarim her sey yolundadir";
-		dialogues[1][1] = "1 1 valla nolsun iyi aga\n laptop telefon kasa";
-		dialogues[1][2] = "1 2 deneme text naber\n nasilsin gorusuurz";
-		
-		dialogues[2][0] = "2 0 umarim calisirsn bakail m omg kolay gelsin";
+		dialogues[1][0] = "Her şeyin bir zamanı var, \nama zamanın ne olduğunu hiç \nkimse tam olarak bilemez...";
 	}
 	
 	public void setAction() {
@@ -97,15 +93,22 @@ public class NPC_ extends Entity{
 		
 		dialogueSet++;
 		
-		if(dialogues[dialogueSet][0] == null) {
-			dialogueSet = 0;
-		}
+//		if(dialogues[dialogueSet][0] == null) {
+//			dialogueSet = 0;
+//		}
 		
 // 		son dialogueyi donduruo onemli bi info olursa sona koyariz
-//		if(dialogues[dialogueSet][0] == null) {
-//			dialogueSet--;
-//		
-//		}
+		
+		if(dialogueSet == 0) {
+			if(itemGiven == false) {
+				gp.player.inventory.add(new OBJ_Key(gp));
+			}
+		}
+		
+		if(dialogues[dialogueSet][0] == null) {
+
+			dialogueSet--;
+		}
 		
 		//konusmadan sonra takip etmesi icin
 		//onPath = true;

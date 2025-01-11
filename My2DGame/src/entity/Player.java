@@ -44,11 +44,33 @@ public class Player extends Entity
 	
 	public void setDefaultValues()
 	{
-		worldX = gp.tileSize * 55;
-		worldY = gp.tileSize * 90;
+	
+		if(gp.currentMap == 0) {
+			worldX = gp.tileSize * 55;
+			worldY = gp.tileSize * 90;
+			direction = "down";
+		}
+		if(gp.currentMap == 1) {
+			worldX = gp.tileSize * 62;
+			worldY = gp.tileSize * 54;
+			direction = "up";
+		}
+		if(gp.currentMap == 2) {
+			worldX = gp.tileSize * 79;
+			worldY = gp.tileSize * 44;
+			direction = "left";
+		}
+		if(gp.currentMap == 3) {
+			worldX = gp.tileSize * 34;
+			worldY = gp.tileSize * 59;
+			direction = "left";
+		}
+		
+		//worldX = gp.tileSize * 55;
+		//worldY = gp.tileSize * 90;
 		defaultSpeed = 4;
 		speed = defaultSpeed;
-		direction = "down";
+		//direction = "down";
 		
 		//player status;
 		level = 1;
@@ -81,13 +103,18 @@ public class Player extends Entity
 			direction = "down";
 		}
 		if(gp.currentMap == 1) {
-			worldX = gp.tileSize * 51;
-			worldY = gp.tileSize * 19;
-			direction = "left";
+			worldX = gp.tileSize * 62;
+			worldY = gp.tileSize * 54;
+			direction = "up";
 		}
 		if(gp.currentMap == 2) {
 			worldX = gp.tileSize * 79;
 			worldY = gp.tileSize * 44;
+			direction = "left";
+		}
+		if(gp.currentMap == 3) {
+			worldX = gp.tileSize * 34;
+			worldY = gp.tileSize * 59;
 			direction = "left";
 		}
 

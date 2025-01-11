@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable
 	public int maxWorldCol; // final 50
 	public int maxWorldRow; // final 50
 	public final int maxMap = 10;
-	public int currentMap = 0;
+	public int currentMap = 3;
 	
 	//For Full Screen
 	//int screenWidth2 = screenWidth;
@@ -334,7 +334,7 @@ public class GamePanel extends JPanel implements Runnable
 	
 	public void playSE(int i) {
 		
-	    System.out.println("Playing sound index: " + i);
+//	    System.out.println("Playing sound index: " + i);
 		se.setFile(i);
 		se.play();
 	}

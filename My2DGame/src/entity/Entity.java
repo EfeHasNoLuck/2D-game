@@ -52,6 +52,7 @@ public class Entity
 	public Entity loot;
 	public boolean opened = false;
 	public boolean inRage = false;
+	public boolean itemGiven = false;
 	
 	//Counter
 	public int spriteCounter = 0;
