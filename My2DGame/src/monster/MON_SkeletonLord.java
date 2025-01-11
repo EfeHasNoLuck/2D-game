@@ -2,16 +2,18 @@ package monster;
 
 import java.util.Random;
 
+import data.Progress;
 import entity.Entity;
 import main.GamePanel;
 import object.OBJ_Coin_tl;
+import object.OBJ_Door_Iron;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 
 public class MON_SkeletonLord extends Entity{
 
 	GamePanel gp;
-	public static final String monName = "Skeleton Lord";
+	public static final String monName = "GPT BOSS";
 	
 	public MON_SkeletonLord(GamePanel gp) {
 		super(gp);
@@ -19,15 +21,17 @@ public class MON_SkeletonLord extends Entity{
 		this.gp = gp;
 		
 		type = type_monster;
+		boss = true;
 		name = monName;
 		defaultSpeed = 1;
 		speed = defaultSpeed;
-		maxLife = 50;
+		maxLife = 1;
 		life = maxLife;
 		attack = 10;
-		defense = 2;
+		defense = 1;
 		exp = 50; 
 		knockBackPower = 5;
+		sleep = true;
 		
 		int size = gp.tileSize*5;
 		solidArea.x = 48;
@@ -43,6 +47,7 @@ public class MON_SkeletonLord extends Entity{
 		
 		getImage();
 		getAttackImage();
+		setDialogue();
 	}
 	
 	public void getImage() {
@@ -96,7 +101,12 @@ public class MON_SkeletonLord extends Entity{
 		}
 
 	}
-
+	public void setDialogue() {
+		dialogues[0][0] = "GPT: Senin yazdığın kod \nbenim hatam bile olamaz...";
+		dialogues[0][1] = "GPT: Her şeyin bir algoritması var, \nve ben senin sonunu hesapladım.";
+		dialogues[0][2] = "GPT: Bu arenada sadece bir kazanan olacak. \nVe o kazanan, sonsuz veritabanımda\n yazılı olan ben olacağım!";
+		dialogues[0][3] = "GPT: Son söz benim, \nçünkü ben kodun ve kaderin efendisiyim!";
+	}
 	public void setAction() {
 		
 		if(inRage == false && life < maxLife/2) {
@@ -129,6 +139,21 @@ public class MON_SkeletonLord extends Entity{
 		actionLockCounter = 0;
 	}
 	public void checkDrop() {
+		
+		gp.bossBattleOn = false;
+		Progress.skeletonLordDefetaed = true;
+		
+		//restore the previous music
+		gp.stopMusic();
+		gp.playMusic(18, 0.8F);
+		
+		for(int i = 0; i < gp.obj[1].length; i++) {
+			if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(OBJ_Door_Iron.objName)) {
+				gp.playSE(21);
+				gp.obj[gp.currentMap][i] = null;
+			}
+		}
+		
 		
 		//cast a die
 		int i = new Random().nextInt(100)+1;

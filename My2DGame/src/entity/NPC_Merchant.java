@@ -31,14 +31,14 @@ public class NPC_Merchant extends Entity{
 	}
 	public void getImage()
 	{
-		up1 = setup("/npc/merchant_down_1");
-		up2 = setup("/npc/merchant_down_2");
-		down1 = setup("/npc/merchant_down_1");
-		down2 = setup("/npc/merchant_down_2");
-		left1 = setup("/npc/merchant_down_1");
-		left2 = setup("/npc/merchant_down_2");
-		right1 = setup("/npc/merchant_down_1");
-		right2 = setup("/npc/merchant_down_2");
+		up1 = setup("/npc/feyza_left_blink");
+		up2 = setup("/npc/feyza_left_jump");
+		down1 = setup("/npc/feyza_right_blink");
+		down2 = setup("/npc/feyza_right_jump");
+		left1 = setup("/npc/feyza_left_blink");
+		left2 = setup("/npc/feyza_left_jump");
+		right1 = setup("/npc/feyza_right_blink");
+		right2 = setup("/npc/feyza_right_jump");
 	}
 	public void setDialogue() {
 		

@@ -1,5 +1,6 @@
 package main;
 
+import data.Progress;
 import entity.Entity;
 
 public class EventHandler {
@@ -10,6 +11,7 @@ public class EventHandler {
 	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
+	int colo = 255;
 	int tempMap, tempCol, tempRow;
 	
 	public EventHandler(GamePanel gp) {
@@ -71,13 +73,17 @@ public class EventHandler {
 			else if(hit(1, 71, 41, "any") == true) {teleport(0, 75, 34, 6);}
 			else if(hit(0, 36, 23, "any") == true) {teleport(2, 79, 43, 18);}
 			else if(hit(2, 79, 43, "any") == true) {teleport(0, 36, 23, 6);}
-			
+			else if(hit(3, 51, 43, "any") == true) {skeletonLord();}
+	//else if(hit(0, 56, 90, "any") == true) {teleport(4, 46, 46, 6);}
+		//	else if(hit(0, 56, 90, "any") == true) {teleport(2, 41, 39, 6);}
+			else if(hit(3, 51, 28, "any") == true) {teleport(4, 46, 47, 6);}
+			else if(hit(2, 42, 38, "any") == true) {teleport(3, 34, 59, 18);}
 			//if(hit(0, 23, 18, "left") == true) {healingPool(gp.dialogueState);}
 			//else if(hit(0, 23, 15, "any") == true) {teleport(1, 51, 18, 18);}
 			//else if(hit(0, 23, 13, "any") == true) {teleport(2, 15, 15, 18);}
 			//else if(hit(1, 51, 18, "any") == true) {teleport(0, 23, 15, 6);}
 			//else if(hit(1, 14, 13, "any") == true) {damagePit(gp.dialogueState);}
-			//else if(hit(1, 42, 19, "up") == true) {speak(gp.npc[1][0]);}
+			else if(hit(3, 64, 51, "right") == true) {speak(gp.npc[3][5]);}
 		}
 	}
 
@@ -135,6 +141,13 @@ public class EventHandler {
 	
 	public void teleport(int map, int col, int row, int sound) {
 		
+		
+		if (map == 4) {
+			colo = 0;
+		}
+		else {
+			colo = 255;
+		}
 		gp.gameState = gp.transitionState;
 		tempMap = map;
 		tempCol = col;
@@ -158,6 +171,13 @@ public class EventHandler {
 			gp.gameState = gp.dialogueState;
 			gp.player.attackCanceled = true;
 			entity.speak();
+		}
+	}
+	public void skeletonLord() {
+		
+		if(gp.bossBattleOn == false && Progress.skeletonLordDefetaed == false) {
+			gp.gameState = gp.cutsceneState;
+			gp.csManager.sceneNum = gp.csManager.skeletonLord;
 		}
 	}
 }

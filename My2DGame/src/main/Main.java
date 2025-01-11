@@ -1,17 +1,20 @@
 package main;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Main 
 {
+	public static JFrame window;
 
 	public static void main(String[] args) 
 	{
 		
-		JFrame window = new JFrame();
+		window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
-		window.setTitle("Best Game Ever");
+		window.setTitle("İstüne Hoş Geldin!");
+		new Main().setIcon();
 		
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
@@ -23,6 +26,10 @@ public class Main
 		
 		gamePanel.setUpGame();
 		gamePanel.startGameThread();
-		//naber
+	}
+	public void setIcon() {
+		
+		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("player/boy_down_1.png"));
+		window.setIconImage(icon.getImage());
 	}
 }

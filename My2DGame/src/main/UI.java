@@ -84,6 +84,7 @@ public class UI {
 			if(gp.gameState == gp.playState)
 			{
 				drawPlayerLife();
+				drawMonsterLife();
 				drawMessage();
 			}
 			
@@ -115,7 +116,7 @@ public class UI {
 			
 			// TRANSITION
 			if(gp.gameState == gp.transitionState) {
-				drawTransition();
+				drawTransition(gp.eHandler.colo);
 			}
 			
 			// TRADE
@@ -174,6 +175,56 @@ public class UI {
 		}
 		
 		
+	}
+	public void drawMonsterLife() {
+		
+		// Monster HP
+		
+		for(int i = 0; i < gp.monster[1].length; i++) {
+			
+			Entity monster = gp.monster[gp.currentMap][i];
+			
+			if(monster != null && monster.inCamera() == true) {
+				
+				if(monster.hpBarOn == true && monster.boss == false)
+				{
+					double oneScale = (double)gp.tileSize/monster.maxLife; 
+					if(monster.life < 0) {monster.life = 0;}
+					double hpBarValue = oneScale*monster.life;
+					
+					g2.setColor(new Color(35, 35, 35));
+					g2.fillRect(monster.getScreenX()-1, monster.getScreenY()-14, gp.tileSize+2, 12);
+					g2.setColor(new Color(255, 0, 30));
+					g2.fillRect(monster.getScreenX(), monster.getScreenY() - 13, (int)hpBarValue, 10);
+					
+					monster.hpBarCounter++;
+					
+					if(monster.hpBarCounter > 600) {
+						monster.hpBarCounter = 0;
+						monster.hpBarOn = false;
+					}
+				}
+				else if(monster.boss == true) {
+					
+					double oneScale = (double)gp.tileSize*8/monster.maxLife; 
+					if(monster.life < 0) {monster.life = 0;}
+					double hpBarValue = oneScale*monster.life;
+					
+					int x = gp.screenWidth/2 - gp.tileSize*4;
+					int y = gp.tileSize*10;
+					
+					g2.setColor(new Color(35, 35, 35));
+					g2.fillRect(x-1, y-1, gp.tileSize*8 + 2, 22);
+					
+					g2.setColor(new Color(255, 0, 30));
+					g2.fillRect(x, y, (int)hpBarValue, 20);
+					
+					g2.setFont(g2.getFont().deriveFont(Font.BOLD,24f));
+					g2.setColor(Color.white);
+					g2.drawString(monster.name, x + 4, y - 10);
+				}
+			}
+		}
 	}
 	public void drawMessage() {
 		int messageX = gp.tileSize;
@@ -304,11 +355,13 @@ public class UI {
 	}
 	public void drawDialogueScreen() {
 		
+		
 		int x = gp.tileSize*3;
 		int y = gp.tileSize/2;
 		int width = gp.screenWidth - (gp.tileSize*6);
 		int height = gp.tileSize*4;
 		drawSubWindow(x, y, width, height);
+		
 		
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,28F));
 		x += gp.tileSize;
@@ -316,13 +369,11 @@ public class UI {
 		
 		if(npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null) {
 //			currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
-			
 			char characters[] = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 			
 			if(charIndex < characters.length) {
 				
-					gp.playSE(24);
-				
+				gp.playSE(24);
 				String s = String.valueOf(characters[charIndex]);
 				combinedText = combinedText + s;
 				currentDialogue = combinedText;
@@ -334,7 +385,7 @@ public class UI {
 				charIndex = 0;
 				combinedText = "";
 				
-				if(gp.gameState == gp.dialogueState) {
+				if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState) {
 					npc.dialogueIndex++;
 					gp.keyH.enterPressed = false;
 				}
@@ -345,6 +396,9 @@ public class UI {
 			
 			if(gp.gameState == gp.dialogueState) {
 				gp.gameState = gp.playState;
+			}
+			if(gp.gameState == gp.cutsceneState) {
+				gp.csManager.scenePhase++;
 			}
 		}
 		
@@ -820,10 +874,10 @@ public class UI {
 		}
 		
 	}
-	public void drawTransition() {
+	public void drawTransition(int value) {
 		
 		counter++;
-		g2.setColor(new Color(0, 0, 0, counter*5));
+		g2.setColor(new Color(255, 255, 255, counter*5));
 		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 		
 		if(counter == 50) {
@@ -835,7 +889,6 @@ public class UI {
 			gp.eHandler.previousEventX = gp.player.worldX;
 			gp.eHandler.previousEventY = gp.player.worldY;
 		}
-		
 	}
 	public void drawTradeScreen() {
 		

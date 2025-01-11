@@ -1,8 +1,7 @@
 package entity;
 
-import java.util.Random;
-
 import main.GamePanel;
+import object.OBJ_Axe;
 
 public class NPC_Eray extends Entity {
 
@@ -47,39 +46,14 @@ public class NPC_Eray extends Entity {
 		dialogues[1][14] = "Hüseyin: Ne?! Nasıl yani?";
 		dialogues[1][15] = "Eray: Gidiyorum.";
 		dialogues[1][16] = "Hüseyin: A-ama ben?!.";
-		dialogues[1][17] = "Eray: Şu aşağıdaki kartı kullanarak\nilerideki turnikeyi geçebilirsin.";
+		dialogues[1][17] = "Eray: Çantana koyduğum baltayı kullanarak\nilerideki turnikeyi geçebilirsin.";
 		dialogues[1][18] = "Eray: İçeride başka insanlar da var.\nEğer teorim doğruysa, onları da kurtarabilirsin.\nGit ve onlara yardım et.";
 		dialogues[1][19] = "Eray: Artık vakit geldi... (Hâlâ bir şey olmuyor.).";
 		dialogues[1][20] = "Hüseyin: DUR! DAHA İŞİMİZ BİTMEDİ, ERAY DAYI!!";
 		dialogues[1][21] = "Eray: Olamaz, acilen saçımı üçe vurup\nzengin olmam lazım, fr.\nTekrar karşılaşacağız, ngl.";
 		
 		dialogues[2][0] = "Eray: Lan, senin saçın zate... gitti... AMAN BE!";
-		
 
-		
-		/*
-		 * -Hüseyin: Merhaba!
--Eray: …
--Hüseyin: Burası neresi?! 
--(mırıldanarak)5x30
--Anlayamıyorum seni yardım edecek misin etmeyecek misin?
--(mırıldanarak) ngl bro thats craaazy mann
--E Eray dayı ?! bu sen misin?
--evet o benim, youtube da 20 bin abonem var kanalıma şu linkten ulaşa…
--kanka şimdi sırası değil buradan nasıl çıkacağımızı bulmamız gerek. 
--Ben hatırlayamayacağım kadar uzun süredir buradayım. Bunca zamandır ne çevremdekilerden ne de kendi kimliğimden haberim vardı taa ki sen ismimi söyleyene kadar. Burada kimse kimseyi tanımaz sen beni nasıl hatırlayabildin?
--Bilmiyorum.. meditasyon yaparken kullandığın kelimeler.. sanırım ne olduysa onları duyduktan sonra kim olduğun bir anda aklımda canlandı.Bana yardım edecek misin.
--İsterdim ancak buradaki vaktim doldu sanırım buradan çıkmanın yolu kim olduğunu hatırlamak
--Ne! nasıl yani?
-- Gidiyorum
--A ama ben??
--Şu aşağıdaki kartı kullanarak ilerideki turnikeyi geçebilirsin
--İçeride başka insanlara da var eğer teorim doğruysa onları da kurtarabilirsin.Git ve onlara yardım et.Artık vakit geldi..(hala bir şey olmuyor)
--DUR DAHA İŞİMİZ BİTMEDİ ERAY DAYI!!
--Olamaz acilen saçımı üçe vurup zengin olmam lazım fr Tekrar karşılaşacağız ngl.
--lan senin saçın zate… gitti.. AMAN BE!
-
-		 */
 	}
 
 	
@@ -118,9 +92,14 @@ public class NPC_Eray extends Entity {
 			this.worldX = 1;
 			this.worldY = 1;
 		}
+		if(dialogueSet == 1) {
+			if(itemGiven == false) {
+				gp.player.inventory.add(new OBJ_Axe(gp));
+			}
+		}
 		
 		if(dialogues[dialogueSet][0] == null) {
-			dialogueSet = 0;
+			dialogueSet--;
 		}
 		
 // 		son dialogueyi donduruo onemli bi info olursa sona koyariz

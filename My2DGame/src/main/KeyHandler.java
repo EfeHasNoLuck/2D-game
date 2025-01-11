@@ -39,7 +39,7 @@ public class KeyHandler implements KeyListener {
 		}
 		
 		// DIALOGUE
-		else if(gp.gameState == gp.dialogueState) {
+		else if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState) {
 			dialogueState(code);
 		}
 		
@@ -237,6 +237,12 @@ public class KeyHandler implements KeyListener {
 					gp.playMusic(6, 0.8F);
 				}
 				if(gp.currentMap == 1) {
+					gp.playMusic(18, 0.8F);
+				}
+				if(gp.currentMap == 2) {
+					gp.playMusic(18, 0.8F);
+				}
+				if(gp.currentMap == 3) {
 					gp.playMusic(18, 0.8F);
 				}
 

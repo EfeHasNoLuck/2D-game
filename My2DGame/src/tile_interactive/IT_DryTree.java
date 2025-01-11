@@ -16,7 +16,7 @@ public class IT_DryTree extends InteractiveTile{
 		this.worldX = gp.tileSize * col;
 		this.worldY = gp.tileSize * row;
 		
-		down1 = setup("/tiles_interactive/drytree");
+		down1 = setup("/tiles_interactive/interactive_tree");
 		destructible = true;
 		life = 3;
 	}
@@ -36,7 +36,8 @@ public class IT_DryTree extends InteractiveTile{
 	}
 	
 	public InteractiveTile getDestroyedForm() {
-		InteractiveTile tile = new IT_Trunk(gp, worldX/gp.tileSize, worldY/gp.tileSize);
+		//InteractiveTile tile = new IT_Trunk(gp, worldX/gp.tileSize, worldY/gp.tileSize);
+		InteractiveTile tile = null;
 		return tile;
 	}
 	public Color getParticleColor() {

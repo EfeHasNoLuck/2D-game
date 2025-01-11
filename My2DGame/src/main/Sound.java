@@ -42,6 +42,9 @@ public class Sound {
 		soundURL[22] = getClass().getResource("/sound/blocked.wav");
 		soundURL[23] = getClass().getResource("/sound/parry.wav");
 		soundURL[24] = getClass().getResource("/sound/speak.wav"); 
+		soundURL[25] = getClass().getResource("/sound/unlock.wav");
+		soundURL[26] = getClass().getResource("/sound/boss_music.wav");
+		soundURL[27] = getClass().getResource("/sound/end.wav");
 	}
 	
 	public void setFile(int i) {

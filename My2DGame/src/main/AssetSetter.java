@@ -1,18 +1,27 @@
 package main;
 
+import data.Progress;
 import entity.NPC_;
 import entity.NPC_Ali;
 import entity.NPC_BigRock;
 import entity.NPC_Eray;
+import entity.NPC_Eray_2;
 import entity.NPC_Feyza;
+import entity.NPC_Feyza_2;
 import entity.NPC_Makineci;
+import entity.NPC_Merchant;
 import monster.MON_Orc;
 import monster.MON_RedSlime;
+import monster.MON_SkeletonLord;
 import object.OBJ_Chest;
 import object.OBJ_Door;
 import object.OBJ_Door_Iron;
+import object.OBJ_Door_Turn;
+import object.OBJ_Eclipse;
 import object.OBJ_Pickaxe;
+import tile_interactive.IT_Desktop;
 import tile_interactive.IT_DestructibleWall;
+import tile_interactive.IT_DryTree;
 import tile_interactive.IT_MetalPlate;
 
 public class AssetSetter {
@@ -33,6 +42,10 @@ public class AssetSetter {
 		gp.obj[mapNum][i] = new OBJ_Door(gp);
 		gp.obj[mapNum][i].worldX = 75 * gp.tileSize;
 		gp.obj[mapNum][i].worldY = 34 * gp.tileSize;
+		i++;
+		gp.obj[mapNum][i] = new OBJ_Door_Turn(gp);
+		gp.obj[mapNum][i].worldX = 36 * gp.tileSize;
+		gp.obj[mapNum][i].worldY = 23 * gp.tileSize;
 		i++;
 /*
 		gp.obj[mapNum][i] = new OBJ_Coin_tl(gp);
@@ -111,6 +124,7 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldY = 47 * gp.tileSize;
 		i++;
 
+
 /*
 		gp.obj[mapNum][i] = new OBJ_Chest(gp);
 		gp.obj[mapNum][i].setLoot(new OBJ_Pickaxe(gp));
@@ -131,8 +145,24 @@ public class AssetSetter {
 		gp.obj[mapNum][i].worldY = 15 * gp.tileSize;
 		
 */
-		mapNum = 1;
+		mapNum = 3;
 		i = 0;
+		gp.obj[mapNum][i] = new OBJ_Door_Iron(gp);
+		gp.obj[mapNum][i].worldX = 51 * gp.tileSize;
+		gp.obj[mapNum][i].worldY = 30 * gp.tileSize;
+		i++;
+		
+//		gp.obj[mapNum][i] = new OBJ_Eclipse(gp);
+//		gp.obj[mapNum][i].worldX = 51 * gp.tileSize;
+//		gp.obj[mapNum][i].worldY = 27 * gp.tileSize;
+//		i++;
+		
+		mapNum = 4;
+		i = 0;
+		gp.obj[mapNum][i] = new OBJ_Eclipse(gp);
+		gp.obj[mapNum][i].worldX = gp.tileSize*60;
+		gp.obj[mapNum][i].worldY = gp.tileSize*47;
+		i++;
 	}
 	
 	
@@ -179,6 +209,25 @@ public class AssetSetter {
 		gp.npc[mapNum][i].worldX = gp.tileSize*37;
 		gp.npc[mapNum][i].worldY = gp.tileSize*50;
 		i++;
+		
+		mapNum = 3;
+		i = 0;
+		gp.npc[mapNum][5] = new NPC_Merchant(gp);
+		gp.npc[mapNum][5].worldX = gp.tileSize*66;
+		gp.npc[mapNum][5].worldY = gp.tileSize*51;
+		i++;
+		
+		mapNum = 4;
+		i = 0;
+		gp.npc[mapNum][i] = new NPC_Eray_2(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*58;
+		gp.npc[mapNum][i].worldY = gp.tileSize*47;
+		i++;
+		gp.npc[mapNum][i] = new NPC_Feyza_2(gp);
+		gp.npc[mapNum][i].worldX = gp.tileSize*49;
+		gp.npc[mapNum][i].worldY = gp.tileSize*47;
+		i++;
+
 	}
 
 	
@@ -267,6 +316,36 @@ public class AssetSetter {
 		gp.monster[mapNum][i].worldX = gp.tileSize*37;
 		gp.monster[mapNum][i].worldY = gp.tileSize*53;
 		i++;
+		
+		i = 0;
+		mapNum = 3;
+		
+		gp.monster[mapNum][i] = new MON_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*44;
+		gp.monster[mapNum][i].worldY = gp.tileSize*49;
+		i++;
+		gp.monster[mapNum][i] = new MON_Orc(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*44;
+		gp.monster[mapNum][i].worldY = gp.tileSize*48;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*40;
+		gp.monster[mapNum][i].worldY = gp.tileSize*54;
+		i++;
+		gp.monster[mapNum][i] = new MON_RedSlime(gp);
+		gp.monster[mapNum][i].worldX = gp.tileSize*48;
+		gp.monster[mapNum][i].worldY = gp.tileSize*54;
+		i++;
+		
+		if(Progress.skeletonLordDefetaed == false) {
+			gp.monster[mapNum][i] = new MON_SkeletonLord(gp);
+			gp.monster[mapNum][i].worldX = gp.tileSize*49;
+			gp.monster[mapNum][i].worldY = gp.tileSize*31;
+			i++;
+		}
+		
+		
+
 	}
 	
 	public void setInteractiveTile() {
@@ -274,14 +353,12 @@ public class AssetSetter {
 
 		int mapNum = 0;
 		int i = 0;
-//		gp.iTile[mapNum][i] = new IT_DryTree(gp,28,28);i++;
-//		gp.iTile[mapNum][i] = new IT_DryTree(gp,29,28);i++;
-//		gp.iTile[mapNum][i] = new IT_DryTree(gp,30,28);i++;
-//		gp.iTile[mapNum][i] = new IT_DryTree(gp,31,28);i++;
-//		gp.iTile[mapNum][i] = new IT_DryTree(gp,32,28);i++;
-		
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,52,57);i++;
+		gp.iTile[mapNum][i] = new IT_DryTree(gp,53,57);i++;
+
 		mapNum = 1;
 		i = 0;
+		gp.iTile[mapNum][i] = new IT_Desktop(gp,67,48);i++;
 //		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,22);i++;
 //		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,21);i++;
 //		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,16,20);i++;
@@ -305,6 +382,13 @@ public class AssetSetter {
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,52,51);i++;
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,42,48);i++;
 		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,43,48);i++;
+		
+		mapNum = 3;
+		i = 0;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,43,58);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,44,58);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,43,59);i++;
+		gp.iTile[mapNum][i] = new IT_DestructibleWall(gp,44,59);i++;
 
 	}
 }

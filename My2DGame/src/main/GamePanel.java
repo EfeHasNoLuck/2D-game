@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable
 	public int maxWorldCol; // final 50
 	public int maxWorldRow; // final 50
 	public final int maxMap = 10;
-	public int currentMap = 3;
+	public int currentMap = 0;
 	
 	//For Full Screen
 	//int screenWidth2 = screenWidth;
@@ -58,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable
 	public PathFinder pFinder = new PathFinder(this);
 	SaveLoad saveLoad = new SaveLoad(this);
 	public EntityGenerator eGenerator = new EntityGenerator(this);
+	public CutsceneManager csManager = new CutsceneManager(this);
 	Thread gameThread;
 	
 	//Entity & Object
@@ -82,6 +83,10 @@ public class GamePanel extends JPanel implements Runnable
 	public final int gameOverState = 6;
 	public final int transitionState = 7;
 	public final int tradeState = 8;
+	public final int cutsceneState = 11;
+	
+	//others
+	public boolean bossBattleOn = false;
 	
 	public GamePanel()
 	{
@@ -103,6 +108,8 @@ public class GamePanel extends JPanel implements Runnable
 	
 	public void resetGame(boolean restart) {
 		
+		removeTempEntity();
+		bossBattleOn = false;
 		player.setDefaultPositions();
 		player.restoreStatus();
 		player.resetCounter();
@@ -292,8 +299,13 @@ public class GamePanel extends JPanel implements Runnable
 			// Empty entity list
 			entityList.clear();
 			
+			// CUTSCENE
+		//	csManager.draw(g2);
+			
 			// UI
 			ui.draw(g2);
+			
+			csManager.draw(g2);
 		}
 		
 		// TILE
@@ -338,4 +350,14 @@ public class GamePanel extends JPanel implements Runnable
 		se.setFile(i);
 		se.play();
 	}
+	public void removeTempEntity() {
+		for(int mapNum = 0; mapNum < maxMap; mapNum++) {
+			for(int i = 0; i < obj[1].length; i++) {
+				if(obj[mapNum][i] != null && obj[mapNum][i].temp == true) {
+					obj[mapNum][i] = null;
+				}
+			}
+		}
+	}
 }
+

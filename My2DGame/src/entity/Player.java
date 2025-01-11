@@ -65,6 +65,11 @@ public class Player extends Entity
 			worldY = gp.tileSize * 59;
 			direction = "left";
 		}
+		if(gp.currentMap == 3) {
+			worldX = gp.tileSize * 46;
+			worldY = gp.tileSize * 47;
+			direction = "right";
+		}
 		
 		//worldX = gp.tileSize * 55;
 		//worldY = gp.tileSize * 90;
@@ -115,6 +120,11 @@ public class Player extends Entity
 		if(gp.currentMap == 3) {
 			worldX = gp.tileSize * 34;
 			worldY = gp.tileSize * 59;
+			direction = "left";
+		}
+		if(gp.currentMap == 4) {
+			worldX = gp.tileSize * 46;
+			worldY = gp.tileSize * 47;
 			direction = "left";
 		}
 
@@ -170,7 +180,6 @@ public class Player extends Entity
 		return currentShieldSlot;
 	}
 	public void getImage() {
-		
 		up1 = setup("/player/boy_up_1");
 		up2 = setup("/player/boy_up_2");
 		down1 = setup("/player/boy_down_1");
@@ -695,7 +704,10 @@ public class Player extends Entity
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
 		}
 		
-		g2.drawImage(image, tempScreenX, tempScreenY, null);
+		if(drawing == true) {
+			g2.drawImage(image, tempScreenX, tempScreenY, null);
+		}
+
 		
 		//reset alpha
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));

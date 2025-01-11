@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import main.GamePanel;
+import object.OBJ_Hougyoku;
 import object.OBJ_Key;
 
 public class NPC_ extends Entity{
@@ -43,7 +44,8 @@ public class NPC_ extends Entity{
 		
 		dialogues[0][0] = "Kız: Ah, sonunda geldin!";
 		dialogues[0][1] = "Kız: Çantana Anahtar koydum bu anahtarla\n alt kattaki b701 kapısını açabilirsin";
-		dialogues[0][2] = "Kız: Aaa bu arada!";
+		dialogues[0][2] = "Kız: Çantana Hougyoku'da koydum\nBununla anlam veremediğin\nkapıları açabilirsin";
+		dialogues[0][3] = "Kız: Aaa bu arada!";
 		
 		dialogues[1][0] = "Her şeyin bir zamanı var, \nama zamanın ne olduğunu hiç \nkimse tam olarak bilemez...";
 	}
@@ -101,6 +103,7 @@ public class NPC_ extends Entity{
 		
 		if(dialogueSet == 0) {
 			if(itemGiven == false) {
+				gp.player.inventory.add(new OBJ_Hougyoku(gp));
 				gp.player.inventory.add(new OBJ_Key(gp));
 			}
 		}
