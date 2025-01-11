@@ -373,7 +373,7 @@ public class UI {
 			
 			if(charIndex < characters.length) {
 				
-				gp.playSE(24);
+				//gp.playSE(24);
 				String s = String.valueOf(characters[charIndex]);
 				combinedText = combinedText + s;
 				currentDialogue = combinedText;
