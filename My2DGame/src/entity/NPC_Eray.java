@@ -26,7 +26,6 @@ public class NPC_Eray extends Entity {
 		right1 = setup("/npc/eray_4");
 		right2 = setup("/npc/eray_4");
 	}
-	
 	public void setDialogue() {
 		
 		dialogues[1][0] = "Hüseyin: Merhaba!";
@@ -55,9 +54,6 @@ public class NPC_Eray extends Entity {
 		dialogues[2][0] = "Eray: Lan, senin saçın zate... gitti... AMAN BE!";
 
 	}
-
-	
-	
 	public void setAction() {
 
 		actionLockCounter++;
