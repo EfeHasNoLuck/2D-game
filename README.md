@@ -105,12 +105,12 @@ My2DGame/
 
 ## Credits
 
-Built by **Group 7** at Istanbul Health and Technology University.
+Made together by **Group 7** at Istanbul Health and Technology University.
 
 | | |
 |---|---|
-| **Ahmet Efe Saygılı** ([@EfeHasNoLuck](https://github.com/EfeHasNoLuck)) | Programming: all code in this repository |
-| **Ahmed Hamza Kerman**, **Hasan Ulaş Çelik**, **Hüseyin Can Çaltı** | Pixel art and character design support |
+| **Ahmet Efe Saygılı** ([@EfeHasNoLuck](https://github.com/EfeHasNoLuck)) | Code and pixel art |
+| **Ahmed Hamza Kerman**, **Hasan Ulaş Çelik**, **Hüseyin Can Çaltı** | Pixel art and characters |
 
 **Special thanks**
 - [RyiSnow](https://www.youtube.com/@RyiSnow): this project was built while following his *How to Make a 2D Game in Java* series. The engine architecture comes from the series, and some of the base sprites and sound effects come from its resources.
