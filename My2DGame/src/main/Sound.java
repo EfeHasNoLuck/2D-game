@@ -6,12 +6,12 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
 
 public class Sound {
 
 	Clip clip;
 	URL soundURL[] = new URL[30];
-	FloatControl fc;
 	int volumeScale = 3;
 	float volume;
 	
@@ -47,55 +47,96 @@ public class Sound {
 		soundURL[27] = getClass().getResource("/sound/end.wav");
 	}
 	
-	public void setFile(int i) {
-		
-		try {
-			AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-			clip = AudioSystem.getClip();
-			clip.open(ais);
-			fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-			checkVolume();
-			
+	public synchronized void setFile(int i) {
+		// This slot owns the current music clip; effects have independent lifetimes.
+		stop();
+		clip = loadClip(i);
+	}
+
+	private Clip loadClip(int i) {
+		if(i < 0 || i >= soundURL.length || soundURL[i] == null) {
+			System.err.println("Sound resource not found: " + i);
+			return null;
+		}
+
+		Clip loadedClip = null;
+		try(AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i])) {
+			loadedClip = AudioSystem.getClip();
+			loadedClip.open(ais);
+			applyVolume(loadedClip, getScaledVolume());
+			return loadedClip;
 		}catch(Exception e) {
+			if(loadedClip != null) {
+				loadedClip.close();
+			}
+			System.err.println("Unable to load sound " + i + ": " + e.getMessage());
+			return null;
 		}
 	}
-	
-    public void setVolume(float volume) {
-        if (clip != null) {
-            try {
-                // Map the volume from [0, 1] to [-80.0, 6.0] dB
-                float decibelValue = mapToDecibels(volume);
 
-                // Get the volume control (MASTER_GAIN)
-                FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                volumeControl.setValue(decibelValue);  // Set the volume in dB
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+	public void playEffect(int i) {
+		// Do not replace a playing effect: combat/UI sounds may overlap.
+		startOneShot(loadClip(i));
+	}
+
+	private void startOneShot(Clip playingClip) {
+		if(playingClip == null || !playingClip.isOpen()) {
+			return;
+		}
+		playingClip.addLineListener(event -> {
+			if(event.getType() == LineEvent.Type.STOP) {
+				// Capture this clip, never the mutable music slot.
+				playingClip.close();
+			}
+		});
+		try {
+			playingClip.start();
+		}catch(RuntimeException e) {
+			playingClip.close();
+			System.err.println("Unable to play sound: " + e.getMessage());
+		}
+	}
+
+    public synchronized void setVolume(float volume) {
+        applyVolume(clip, mapToDecibels(volume));
     }
+
+	private void applyVolume(Clip target, float decibels) {
+		if(target != null && target.isOpen()
+				&& target.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+			FloatControl control = (FloatControl)target.getControl(FloatControl.Type.MASTER_GAIN);
+			control.setValue(Math.max(control.getMinimum(), Math.min(control.getMaximum(), decibels)));
+		}
+	}
 
     private float mapToDecibels(float volume) {
         // Map 0 -> -80.0 dB (mute), 1 -> 6.0 dB (max volume)
         return -80.0f + (volume * 86.0f);  // 86.0 = 6.0 - (-80.0)
     }
 	
-	public void play() {
-		
-		clip.start();
+	public synchronized void play() {
+		startOneShot(clip);
 	}
 	
-	public void loop() {
-		
-		clip.loop(clip.LOOP_CONTINUOUSLY);
+	public synchronized void loop() {
+		if(clip != null && clip.isOpen()) {
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		}
 	}
 	
-	public void stop() {
-	
-		clip.stop();
+	public synchronized void stop() {
+		if(clip != null) {
+			clip.stop();
+			clip.close();
+			clip = null;
+		}
 	}
 	
-	public void checkVolume() {
+	public synchronized void checkVolume() {
+		applyVolume(clip, getScaledVolume());
+	}
+
+	private float getScaledVolume() {
 		
 		switch(volumeScale) {
 		case 0: volume = -80f; break;
@@ -106,6 +147,6 @@ public class Sound {
 		case 5: volume = 6f; break;
 		}
 		
-		fc.setValue(volume);
+		return volume;
 	}
 }

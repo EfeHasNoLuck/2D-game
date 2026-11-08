@@ -335,7 +335,6 @@ public class GamePanel extends JPanel implements Runnable
 	public void playMusic(int id, float volume) {
 		music.setFile(id);
 		music.setVolume(volume);
-		music.play();
 		music.loop();
 	}
 	
@@ -346,9 +345,7 @@ public class GamePanel extends JPanel implements Runnable
 	
 	public void playSE(int i) {
 		
-//	    System.out.println("Playing sound index: " + i);
-		se.setFile(i);
-		se.play();
+		se.playEffect(i);
 	}
 	public void removeTempEntity() {
 		for(int mapNum = 0; mapNum < maxMap; mapNum++) {

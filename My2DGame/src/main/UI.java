@@ -39,6 +39,9 @@ public class UI {
 	public Entity npc;
 	int charIndex = 0;
 	String combinedText = "";
+	private static final long DIALOGUE_SOUND_INTERVAL_NANOS = 100_000_000L;
+	private long lastDialogueSoundTime;
+	private boolean dialogueSoundPlayed;
 
 	DecimalFormat dFormat = new DecimalFormat("#0.00");
 	
@@ -373,7 +376,14 @@ public class UI {
 			
 			if(charIndex < characters.length) {
 				
-				//gp.playSE(24);
+				char character = characters[charIndex];
+				long now = System.nanoTime();
+				if(!Character.isWhitespace(character) && (!dialogueSoundPlayed
+						|| now - lastDialogueSoundTime >= DIALOGUE_SOUND_INTERVAL_NANOS)) {
+					gp.playSE(24);
+					lastDialogueSoundTime = now;
+					dialogueSoundPlayed = true;
+				}
 				String s = String.valueOf(characters[charIndex]);
 				combinedText = combinedText + s;
 				currentDialogue = combinedText;
